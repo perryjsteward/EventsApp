@@ -1,0 +1,55 @@
+.intro-container {
+  height: 100%;
+  margin: auto;
+  padding-bottom: 50px;
+}
+
+.marketing-section {
+  height: 100%;
+  padding: 50px 50px 0px 50px;
+  font-weight: 300;
+  color: #a0a0a0;
+}
+
+.hide {
+  display: none;
+}
+.marketing-section h1 {
+  font-weight: 300;
+  color: #696969
+}
+
+.account-img {
+    width: 100%;
+    max-width: 300px;
+}
+
+.marketing-outer-container {
+  height: 100%;
+  margin: auto;
+  width: 100%;
+  background-color: #43DFCA;
+  padding-bottom: 50px;
+}
+
+
+.marketing-container {
+  height: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+.marketing-container .marketing-section {
+  color: white;
+}
+
+.marketing-container h2 {
+  font-weight: 300;
+}
+
+
+.intro-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

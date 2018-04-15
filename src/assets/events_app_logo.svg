@@ -1,0 +1,17 @@
+<svg width="146px" height="146px" viewBox="0 0 146 146" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.2 (51160) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="73" cy="73" r="73"></circle>
+    </defs>
+    <g id="web_timeline" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Oval-2" fill="#43DFCA" xlink:href="#path-1"></use>
+        <rect id="Rectangle-6" fill-opacity="0.1" fill="#2C7D72" mask="url(#mask-2)" x="-10" y="74" width="169" height="98"></rect>
+        <text id="e" mask="url(#mask-2)" font-family="HelveticaNeue-UltraLight, Helvetica Neue" font-size="130" font-weight="200" fill="#FFFFFF">
+            <tspan x="41" y="107">e</tspan>
+        </text>
+    </g>
+</svg>
