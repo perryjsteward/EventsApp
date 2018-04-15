@@ -13,6 +13,8 @@ import { FooterComponent } from './shared/_directives/footer/footer.component' /
 import { TimelineComponent } from './timeline/timeline.component'; // should lazy load this
 import { UserLoginComponent } from './user-login/user-login.component'; // should lazy load this
 import { HomeComponent } from './home/home.component' // should lazy load this
+import { CreateComponent } from './shared/_directives/create/create.component'
+
 
 // core
 import { routing } from './app.routing';
@@ -30,7 +32,8 @@ import { AuthInterceptor } from './core/_helpers/auth.interceptor';
     FooterComponent,
     TimelineComponent,
     UserLoginComponent,
-    HomeComponent
+    HomeComponent,
+    CreateComponent
   ],
   imports: [
     CoreModule,
@@ -47,6 +50,9 @@ import { AuthInterceptor } from './core/_helpers/auth.interceptor';
       useClass: AuthInterceptor,
       multi: true
     }
+  ],
+  entryComponents:[
+    CreateComponent
   ],
   bootstrap: [AppComponent]
 })

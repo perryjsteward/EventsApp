@@ -1,0 +1,117 @@
+#create-dialog {
+  height: 100%;
+  width: 100%;
+}
+
+#create-dialog mat-card{
+  box-shadow: none;
+  height: 100% !important;
+}
+
+#create-dialog /deep/ .mat-form-field-label-wrapper {
+    top: -.98375em !important;
+    padding-top: .84375em;
+    margin-left: 10px !important;
+}
+
+#create-dialog /deep/ .mat-form-field-underline {
+    background-color: rgba(0,0,0,0.15) !important;
+}
+
+#create-dialog .mat-form-field {
+  font-weight: 300 !important;
+}
+
+#create-dialog input.mat-input-element {
+    margin-top: -.0625em;
+    margin-left: 9px !important;
+}
+
+#create-dialog  .create-checkbox {
+  font-weight: 300;
+}
+
+#create-dialog textarea.mat-autosize {
+    resize: none;
+    margin-left: 10px;
+}
+
+.create-checkbox {
+  margin-top: 20px;
+}
+
+.form-actions {
+  margin-top: 40px;
+}
+
+.form-icon {
+    font-size: 18px !important;
+    color: #B1B1B1 !important;
+}
+
+.create-title {
+  margin-top: 10px;
+  font-weight: 300;
+}
+
+.create-title h1 {
+  margin-bottom: 0px;
+}
+.create-title p {
+  margin-top: 5px;
+}
+
+
+.create-dialog {
+  height: 100%;
+  overflow-x: scroll;
+  padding: 0px !important;
+}
+
+.close-dialog {
+  width: 100%;
+  height: 30px;
+}
+
+.create-dialog mat-card-header, mat-card-content {
+  font-weight: 300;
+}
+
+.create-dialog mat-card-content {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.disclaimer-container {
+    margin-top: 30px;
+}
+
+.disclaimer-logo {
+  font-size: 30px;
+  color: #979797;
+  margin-right: 0px;
+  margin-top: 12px;
+  margin-left: 5px;
+}
+
+.disclaimer-ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.disclaimer {
+  margin-bottom: 0px;
+  font-size: 14px;
+}
+
+.disclaimer-link {
+  margin-top: 0px;
+  color: #40D5C0 !important;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.input-full-width {
+  width: 100%;
+}

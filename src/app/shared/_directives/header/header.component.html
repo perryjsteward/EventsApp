@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar class="fixed-header" id="app-header">
   <mat-toolbar-row>
 
 
@@ -38,7 +38,7 @@
         <a class='app-font-weight' mat-button color="primary" (click)="auth.login()">Sign up</a>
         <a class='app-font-weight' mat-raised-button color="primary" (click)="auth.login()">Log in</a>
       </div> -->
-      <a class='app-button-raised' mat-raised-button color="primary">Create Event</a>
+      <a class='app-button' mat-button color="primary" (click)="openCreateDialog()">Create Event</a>
 
   </mat-toolbar-row>
 </mat-toolbar>

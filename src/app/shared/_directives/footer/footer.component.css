@@ -1,5 +1,16 @@
 footer {
+    background-color: #323940;
+    overflow: hidden;
+    padding: 20px 30px;
+    margin-top: 50px;
+}
+
+.footer-text {
   width: 100%;
-  border-top: 1px solid #e3e3e3;
-  height: 100px;
+  text-align: center;
+  color: rgba(255, 255, 255, .4);
+  font-size: 13px;
+  letter-spacing: .2px;
+  line-height: 19px;
+  margin: 0;
 }

@@ -1,6 +1,6 @@
 mat-toolbar {
   background: white;
-  border-bottom: 1px solid #e3e3e3 !important;
+  border-bottom: 0px solid !important;
   margin-bottom: 0px;
 }
 
@@ -11,6 +11,17 @@ mat-toolbar {
 .app-logo {
   width: 35px;
   margin-right: 10px;
+}
+
+
+.sticky {
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
 }
 
 .app-name {

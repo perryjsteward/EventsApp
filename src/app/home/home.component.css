@@ -7,17 +7,13 @@
 .marketing-section {
   height: 100%;
   padding: 50px 50px 0px 50px;
-  font-weight: 300;
-  color: #a0a0a0;
+  /* font-weight: 300; */
 }
 
 .hide {
   display: none;
 }
-.marketing-section h1 {
-  font-weight: 300;
-  color: #696969
-}
+
 
 .account-img {
     width: 100%;
@@ -28,8 +24,9 @@
   height: 100%;
   margin: auto;
   width: 100%;
-  background-color: #43DFCA;
-  padding-bottom: 50px;
+  background-color: #40D5C0;
+  padding-bottom: 65px;
+  padding-top: 15px;
 }
 
 
@@ -43,8 +40,8 @@
   color: white;
 }
 
-.marketing-container h2 {
-  font-weight: 300;
+.marketing-container .marketing-section h1 {
+  color: white;
 }
 
 
