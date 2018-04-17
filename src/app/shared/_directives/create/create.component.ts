@@ -1,21 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { NgForm, NgModel } from '@angular/forms';
+import { FormControl, NgForm, NgModel } from '@angular/forms';
 import { AmazingTimePickerService } from 'amazing-time-picker';
+import { EventService } from '../../../core/_services/event.service';
 
-import {
-    ReactiveFormsModule,
-    FormsModule,
-    FormGroup,
-    FormControl,
-    Validators,
-    FormBuilder
-} from '@angular/forms';
+
+// import * as _moment from 'moment';
+// const moment = _moment;
 
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
+  styleUrls: ['./create.component.css'],
 })
 
 export class CreateComponent implements OnInit {
@@ -25,10 +21,12 @@ export class CreateComponent implements OnInit {
   extraOptions = false;
   event: any;
 
+  date: any;
+
   inputName: any;
   selectedEndTime: any;
 
-  constructor(public dialog: MatDialog, private atp: AmazingTimePickerService) {
+  constructor(public dialog: MatDialog, private atp: AmazingTimePickerService, private eventsService: EventService) {
   }
 
   ngOnInit() {
@@ -62,7 +60,15 @@ export class CreateComponent implements OnInit {
   }
 
   onSubmit(form: NgForm){
-    console.log(form.value);
+    var event = {};
+    for(var input in form.value){
+      if(form.value[input] && form.value[input] != ""){
+        event[input] = form.value[input]
+      }
+    }
+    console.log(event)
+    this.eventsService.create(event);
+    // this.eventsService.getAll();
   }
 
   openDisclaimer(){

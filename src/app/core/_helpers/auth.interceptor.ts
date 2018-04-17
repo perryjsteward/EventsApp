@@ -12,11 +12,11 @@ export class AuthInterceptor implements HttpInterceptor {
 
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // req = req.clone({
-    //   setHeaders: {
-    //     Authorization: `Bearer ${}`
-    //   }
-    // });
+    req = req.clone({
+      // setHeaders: {
+      //   'Access-Control-Allow-Origin': '*'
+      // }
+    });
 
     return next.handle(req);
   }

@@ -20,6 +20,13 @@ import { CreateComponent } from './shared/_directives/create/create.component'
 import { routing } from './app.routing';
 import { AuthGuard } from './core/_guards/auth.guard';
 import { AuthenticationService } from './core/_services/authentication.service';
+import { EventService } from './core/_services/event.service';
+
+// datetime update
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter'
 
 // http
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -39,17 +46,22 @@ import { AuthInterceptor } from './core/_helpers/auth.interceptor';
     CoreModule,
     SharedModule,
     BrowserModule,
+    MatDatepickerModule,
+    // MatMomentDateModule,
     routing
   ],
   providers: [
     AuthGuard,
     FacebookService,
     AuthenticationService,
+    EventService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    // {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    // {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
   ],
   entryComponents:[
     CreateComponent

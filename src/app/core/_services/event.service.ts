@@ -10,16 +10,23 @@ export class EventService {
 
     constructor(private http: HttpClient) { }
 
-    // getAll() {
-    //     return this.http.get<any[]>('/events');
-    // }
+    getAll() {
+        this.http.get<any[]>(this.apiDomain +'events')
+            .subscribe(response => {
+              console.log(response);
+            });
+    }
 
     getById(id: number) {
-        return this.http.get('/events/' + id);
+        return this.http.get(this.apiDomain + 'events/' + id);
     }
 
     create(event: any) {
-        return this.http.post('/event', event);
+        console.log(event)
+        this.http.post(this.apiDomain + 'events', event)
+            .subscribe(response => {
+              console.log(response);
+            });
     }
 
     // update(event: any) {

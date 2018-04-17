@@ -8,6 +8,7 @@ import { User } from './_models/user.model';
 import { CallbackComponent } from './_directives/callback/callback.component';
 import { AmazingTimePickerModule } from 'amazing-time-picker';
 
+
 @NgModule({
   declarations: [
     // HeaderComponent
@@ -15,12 +16,11 @@ import { AmazingTimePickerModule } from 'amazing-time-picker';
   ],
   imports: [
     MaterialModule,
-    AmazingTimePickerModule,
+    AmazingTimePickerModule
   ],
   exports : [
     MaterialModule,
     AmazingTimePickerModule
-    // HeaderComponent
   ]
 })
 
