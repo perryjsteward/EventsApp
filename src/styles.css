@@ -39,17 +39,33 @@ h1 {
 }
 
 /* Dialog overwrite */
-/* mat-dialog-container {
-  padding: 0px !important;
-} */
+mat-dialog-container {
+  -webkit-overflow-scrolling: touch !important;
+}
+
 /*
 #cdk-overlay-0 {
   max-width: none !important;
 } */
-
+#time-picker-wrapper.active[_ngcontent-c14] {
+    background: none !important;
+    background-color: white !important;
+}
 
 .cdk-overlay-dark-backdrop {
-    background: white;
+    background: none !important;
+    background-color: white !important;
     margin-top: -100px;
     margin-bottom: -100px;
+}
+
+.mat-datepicker-content-touch {
+    box-shadow: 0 0 0 0 rgba(0,0,0,.2), 0 0 0 0 rgba(0,0,0,.14), 0 0 0 0 rgba(0,0,0,.12);
+    display: block;
+    max-height: 80vh;
+    overflow: auto;
+    margin: -24px;
+    z-index: 2000 !important;
+    position: relative !important;
+    background-color: white;
 }

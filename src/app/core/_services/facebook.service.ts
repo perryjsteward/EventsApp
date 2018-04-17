@@ -10,7 +10,7 @@ import { HttpClient, HttpParams} from '@angular/common/http';
 @Injectable()
 export class FacebookClientService {
 
-  apiDomain = "https://graph.facebook.com/"
+  apiDomain = "https://graph.facebook.com/";
 
   constructor(private fb: FacebookService, private http: HttpClient) {
 

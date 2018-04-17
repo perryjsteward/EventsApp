@@ -5,11 +5,14 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class EventService {
+
+    apiDomain = "https://api.eventsapp.co.uk/";
+
     constructor(private http: HttpClient) { }
 
-    getAll() {
-        return this.http.get<any[]>('/events');
-    }
+    // getAll() {
+    //     return this.http.get<any[]>('/events');
+    // }
 
     getById(id: number) {
         return this.http.get('/events/' + id);
@@ -19,11 +22,11 @@ export class EventService {
         return this.http.post('/event', event);
     }
 
-    update(event: any) {
-        return this.http.put('/events/' + event.id, event);
-    }
-
-    delete(id: number) {
-        return this.http.delete('/events/' + id);
-    }
+    // update(event: any) {
+    //     return this.http.put('/events/' + event.id, event);
+    // }
+    //
+    // delete(id: number) {
+    //     return this.http.delete('/events/' + id);
+    // }
 }

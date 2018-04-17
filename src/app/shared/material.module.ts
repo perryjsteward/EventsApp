@@ -11,6 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MatDatepickerModule } from '@angular/material';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatInputModule,
     MatNativeDateModule,
     MatDatepickerModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    FormsModule
   ],
   exports : [
     MatToolbarModule,
@@ -37,7 +39,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatInputModule,
     MatNativeDateModule,
     MatDatepickerModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    FormsModule
   ],
   declarations: []
 })

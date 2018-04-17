@@ -1,6 +1,6 @@
 <div id="create-dialog">
 
-  <div class="close-dialog" [fxLayout]="direction" fxLayoutAlign="end">
+  <div class="close-dialog" fxLayoutAlign="end">
     <button mat-icon-button mat-dialog-close fxFlexAlign="end">
       <mat-icon aria-label="">close</mat-icon>
     </button>
@@ -11,36 +11,36 @@
     <p>Set up a new event & share with friends</p>
   </div>
 
-  <form class="example-form">
+  <form #createEvent="ngForm" class="create-form" (ngSubmit)="onSubmit(createEvent)">
     <mat-form-field class="input-full-width">
       <mat-icon class="form-icon" matPrefix>note_add</mat-icon>
-      <input matInput placeholder="event name">
+      <input [(ngModel)]="event.name" name="name" id="event-name" class="datetime-input" matInput placeholder="event name">
     </mat-form-field>
 
     <mat-form-field *ngIf="extraOptions" class="input-full-width">
       <mat-icon class="form-icon" matPrefix>create</mat-icon>
-      <textarea matTextareaAutosize matInput placeholder="description"></textarea>
+      <textarea [(ngModel)]="event.description" name="description"  id="event-description" matTextareaAutosize matInput placeholder="description"></textarea>
     </mat-form-field>
 
     <mat-form-field *ngIf="extraOptions" class="input-full-width">
-      <mat-icon class="form-icon" matPrefix>location_on</mat-icon>
-      <input matInput placeholder="location">
+      <mat-icon id="location" class="form-icon" matPrefix>location_on</mat-icon>
+      <input [(ngModel)]="event.location" name="location" matInput placeholder="location">
     </mat-form-field>
 
     <div fxLayout="row">
       <mat-form-field fxFlex="50" class="input-full-width">
         <mat-icon class="form-icon" matPrefix>date_range</mat-icon>
-        <input matInput [matDatepicker]="picker" placeholder="from">
+        <input [(ngModel)]="event.start_date" name="start_date" id="event-start-date" class="datetime-input" matInput [matDatepicker]="picker" placeholder="from" (click)="picker.open()" readonly="true">
         <mat-datepicker-toggle matSuffix [for]="picker">
-          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          <mat-icon matDatepickerToggleIcon></mat-icon>
         </mat-datepicker-toggle>
         <mat-datepicker touchUi="true" #picker></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field fxFlex="50" class="input-full-width">
-        <input matInput [matDatepicker]="picker2" placeholder="to">
+        <input [(ngModel)]="event.end_date" name="end_date" id="event-end-date" class="datetime-input" matInput [matDatepicker]="picker2" placeholder="to" (click)="picker2.open()" readonly="true">
         <mat-datepicker-toggle matSuffix [for]="picker2">
-          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          <mat-icon matDatepickerToggleIcon></mat-icon>
         </mat-datepicker-toggle>
         <mat-datepicker touchUi="true" #picker2></mat-datepicker>
       </mat-form-field>
@@ -49,42 +49,58 @@
     <div fxLayout="row">
       <mat-form-field fxFlex="50" class="input-full-width">
         <mat-icon class="form-icon" matPrefix>av_timer</mat-icon>
-        <input matInput [matDatepicker]="picker3" placeholder="starting">
-        <mat-datepicker-toggle matSuffix [for]="picker3">
-          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-        </mat-datepicker-toggle>
-        <mat-datepicker touchUi="true" #picker3></mat-datepicker>
+        <input id="event-start-time" class="datetime-input"
+          (click)="openTime('start_time')"
+          [(ngModel)]="event.start_time"
+          name="start_time"
+          matInput placeholder="starting"
+          readonly="true">
       </mat-form-field>
 
       <mat-form-field fxFlex="50" class="input-full-width">
-        <input matInput [matDatepicker]="picker4" placeholder="until">
-        <mat-datepicker-toggle matSuffix [for]="picker4">
-          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-        </mat-datepicker-toggle>
-        <mat-datepicker touchUi="true" #picker4></mat-datepicker>
+        <input id="event-end-time" class="datetime-input"
+          (click)="openTime('end_time')"
+          [(ngModel)]="event.end_time"
+          name="end_time"
+          matInput placeholder="until"
+          readonly="true">
       </mat-form-field>
     </div>
 
     <div *ngIf="extraOptions" class="create-checkbox" fxLayout="row" fxLayoutAlign="center center">
-      <mat-checkbox>all day event</mat-checkbox>
+      <mat-checkbox [(ngModel)]="event.all_day" name="all_day" >all day event</mat-checkbox>
     </div>
 
 
     <div class="form-actions" fxLayout="row" fxLayoutAlign="center center">
       <button *ngIf="!extraOptions" class="app-button" mat-button color="primary" (click)="openOptions()">more options</button>
       <button *ngIf="extraOptions" class="app-button" mat-button color="primary" (click)="closeOptions()">less options</button>
-      <button class="app-button-raised" mat-raised-button color="primary">Finish</button>
+      <button type="submit" class="app-button-raised" mat-raised-button color="primary">Finish</button>
     </div>
+
+
 
   </form>
 
   <div fxLayout="row" class="disclaimer-container">
     <p *ngIf="!disclaimerFlag" fxFlex class="disclaimer disclaimer-ellipsis">
-      Disclaimer: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id nisi vel velit scelerisque ullamcorper ut a magna. Nullam libero felis, vulputate at blandit ac, volutpat eget metus. Aliquam hendrerit eu magna eu commodo. Maecenas ut urna in nunc lacinia luctus. Etiam id diam nec purus consequat porta. Ut dictum sapien ut pharetra dapibus. Proin hendrerit eget lectus sed laoreet. Phasellus maximus sodales pellentesque. Sed tempus felis et fringilla posuere. Cras maximus diam elit, quis pretium dolor varius a. Cras viverra eros in blandit pretium.
+        Disclaimer: The information contained on https://www.eventsapp.co.uk website and EventsApp mobile app (the "Service") is for general information purposes only.
+
+        EventsApp assumes no responsibility for errors or omissions in the contents on the Service.
+
+        In no event shall EventsApp be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. EventsApp reserves the right to make additions, deletions, or modification to the contents on the Service at any time without prior notice.
     </p>
-    <p *ngIf="disclaimerFlag" class="disclaimer">
-      Disclaimer: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id nisi vel velit scelerisque ullamcorper ut a magna. Nullam libero felis, vulputate at blandit ac, volutpat eget metus. Aliquam hendrerit eu magna eu commodo. Maecenas ut urna in nunc lacinia luctus. Etiam id diam nec purus consequat porta. Ut dictum sapien ut pharetra dapibus. Proin hendrerit eget lectus sed laoreet. Phasellus maximus sodales pellentesque. Sed tempus felis et fringilla posuere. Cras maximus diam elit, quis pretium dolor varius a. Cras viverra eros in blandit pretium.
-    </p>
+    <div *ngIf="disclaimerFlag" class="disclaimer">
+      <p>
+        Disclaimer: The information contained on https://www.eventsapp.co.uk website and EventsApp mobile app (the "Service") is for general information purposes only.
+      </p>
+      <p>
+        EventsApp assumes no responsibility for errors or omissions in the contents on the Service.
+      </p>
+      <p>
+        In no event shall EventsApp be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. EventsApp reserves the right to make additions, deletions, or modification to the contents on the Service at any time without prior notice.
+      </p>
+    </div>
     <mat-icon class="disclaimer-logo" fxFlex="30px" matDatepickerToggleIcon>security</mat-icon>
   </div>
 
