@@ -14,7 +14,14 @@
   <form #createEvent="ngForm" class="create-form" (ngSubmit)="onSubmit(createEvent)">
     <mat-form-field class="input-full-width">
       <mat-icon class="form-icon" matPrefix>note_add</mat-icon>
-      <input [(ngModel)]="event.name" name="name" id="event-name" class="datetime-input" matInput placeholder="event name">
+      <input required
+        [(ngModel)]="event.name"
+        name="name" id="event-name"
+        class="datetime-input"
+        matInput placeholder="event name">
+      <!-- <mat-error *ngIf="createFormControl.hasError('required')">
+        Name is <strong>required</strong>
+      </mat-error> -->
     </mat-form-field>
 
     <mat-form-field *ngIf="extraOptions" class="input-full-width">
@@ -30,7 +37,15 @@
     <div fxLayout="row">
       <mat-form-field fxFlex="50" class="input-full-width">
         <mat-icon class="form-icon" matPrefix>date_range</mat-icon>
-        <input [(ngModel)]="event.start_date" name="start_date" id="event-start-date" class="datetime-input" matInput [matDatepicker]="picker" placeholder="from" (click)="picker.open()" readonly="true">
+        <input required
+          [(ngModel)]="event.start_date"
+          name="start_date" id="event-start-date"
+          class="datetime-input" matInput [matDatepicker]="picker"
+          placeholder="from" (click)="picker.open()"
+          readonly="true">
+          <!-- <mat-error *ngIf="createFormControl.hasError('required')">
+            Start Date is <strong>required</strong>
+          </mat-error> -->
         <mat-datepicker-toggle matSuffix [for]="picker">
           <mat-icon matDatepickerToggleIcon></mat-icon>
         </mat-datepicker-toggle>
@@ -49,7 +64,7 @@
     <div fxLayout="row">
       <mat-form-field fxFlex="50" class="input-full-width">
         <mat-icon class="form-icon" matPrefix>av_timer</mat-icon>
-        <input id="event-start-time" class="datetime-input"
+        <input required id="event-start-time" class="datetime-input"
           (click)="openTime('start_time')"
           [(ngModel)]="event.start_time"
           name="start_time"
@@ -75,7 +90,8 @@
     <div class="form-actions" fxLayout="row" fxLayoutAlign="center center">
       <button *ngIf="!extraOptions" class="app-button" mat-button color="primary" (click)="openOptions()">more options</button>
       <button *ngIf="extraOptions" class="app-button" mat-button color="primary" (click)="closeOptions()">less options</button>
-      <button type="submit" class="app-button-raised" mat-raised-button color="primary">Finish</button>
+      <button *ngIf="validForm()" type="submit" class="app-button-raised" mat-raised-button color="primary">Finish</button>
+      <button *ngIf="!validForm()" type="submit" mat-raised-button color="primary" disabled>Finish</button>
     </div>
 
 
