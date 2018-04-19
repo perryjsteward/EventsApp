@@ -2,7 +2,7 @@ footer {
     background-color: #323940;
     overflow: hidden;
     padding: 20px 30px;
-    margin-top: 50px;
+    /* margin-top: -50px; */
 }
 
 .footer-text {

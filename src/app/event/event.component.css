@@ -1,0 +1,24 @@
+.intro-container {
+  height: 100%;
+  margin: auto;
+  padding:10px;
+  padding-bottom: 50px;
+  text-align: left;
+}
+
+.event-image {
+  padding-top: 150px;
+  padding-bottom: 150px;
+  width: 100%;
+  height: 100%;
+  background-color: #D8D8D8;
+  margin-bottom: 30px;
+  height: 100%;
+  width: 100;
+}
+
+.event-content {
+  margin: 10px !important;
+  height: 100%;
+  width: 100;
+}

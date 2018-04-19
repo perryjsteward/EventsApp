@@ -13,6 +13,7 @@ import { FooterComponent } from './shared/_directives/footer/footer.component' /
 import { TimelineComponent } from './timeline/timeline.component'; // should lazy load this
 import { UserLoginComponent } from './user-login/user-login.component'; // should lazy load this
 import { HomeComponent } from './home/home.component' // should lazy load this
+import { EventComponent } from './event/event.component' // should lazy load this
 import { CreateComponent } from './shared/_directives/create/create.component'
 
 
@@ -40,7 +41,8 @@ import { AuthInterceptor } from './core/_helpers/auth.interceptor';
     TimelineComponent,
     UserLoginComponent,
     HomeComponent,
-    CreateComponent
+    CreateComponent,
+    EventComponent
   ],
   imports: [
     CoreModule,

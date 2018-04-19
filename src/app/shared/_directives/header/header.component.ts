@@ -45,6 +45,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  goHome(){
+    this.router.navigate(['/']);
+  }
+
   openCreateDialog(): void {
     let dialogRef = this.dialog.open(CreateComponent, {
       width: '100%',

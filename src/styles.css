@@ -1,8 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+html {
+    height: calc(100vh - 125px) !important;
+    margin: 0;
+}
+
 body {
-  margin: 0px;
+  margin: 0;
   /* color: #696969; */
   color: rgba(0,0,0,0.55);
   font-family: 'HelveticaNeue-Thin', 'Helvetica Neue Light', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, 'Lucida Grande', sans-serif;
@@ -12,6 +17,18 @@ body {
   font-size: 17px;
   line-height: 24px;
   letter-spacing: 0.5px;
+  height: calc(100vh - 125px) !important;
+}
+
+.hover:hover {
+  cursor: pointer;
+}
+
+.wrapper {
+  min-height: calc(100vh - 125px) !important;
+
+  /* Equal to height of footer */
+  /* But also accounting for potential margin-bottom of last child */
 }
 
 h1 {
@@ -19,6 +36,15 @@ h1 {
     font-family: 'HelveticaNeue-Thin', 'Helvetica Neue Light', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, 'Lucida Grande', sans-serif;
     font-size: 38px;
     line-height: 44px;
+    font-weight: 100;
+    margin: 0 0 10px;
+}
+
+h2 {
+  color: rgba(0,0,0,0.75);
+    font-family: 'HelveticaNeue-Thin', 'Helvetica Neue Light', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, 'Lucida Grande', sans-serif;
+    /* font-size: 38px; */
+    /* line-height: 44px; */
     font-weight: 100;
     margin: 0 0 10px;
 }

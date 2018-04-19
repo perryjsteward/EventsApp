@@ -67,19 +67,14 @@ export class CreateComponent implements OnInit {
   }
 
   onSubmit(form: NgForm){
-    var event = {};
-    for(var input in form.value){
-      if(form.value[input] && form.value[input] != ""){
-        event[input] = form.value[input]
-      }
-    }
-    this.eventsService.create(event)
+    this.eventsService.create(form.value)
         .subscribe(response => {
            if(response.event_id){
-
+             console.log(btoa(response.event_id))
+             this.router.navigate(['/view'],{ queryParams: { id: btoa(response.event_id) } });
+             this.dialog.closeAll();
            }
-        })
-    // this.eventsService.getAll();
+        });
   }
 
   openDisclaimer(){

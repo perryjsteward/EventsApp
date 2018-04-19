@@ -22,8 +22,10 @@ export class EventService {
             });
     }
 
-    getById(id: number) {
-        return this.http.get(this.apiDomain + 'events/' + id);
+    getById(id: string) {
+        return this.http.get(this.apiDomain + 'events/' + id)
+                  .map((response: Response) => response)
+                  .catch((error: Response) => this.handleError(error));
     }
 
     create(event: any): Observable<any> {

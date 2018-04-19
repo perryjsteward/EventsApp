@@ -1,10 +1,10 @@
 <mat-toolbar class="fixed-header" id="app-header">
   <mat-toolbar-row>
 
-
-    <img class="app-logo" src="/assets/events_app_logo.svg"/>
-    <span class="app-name">EventsApp</span>
-
+    <span (click)="goHome()" class="hover">
+      <img class="app-logo" src="/assets/events_app_logo.svg"/>
+      <span class="app-name">EventsApp</span>
+    </span>
     <span class="spacer"></span>
 
     <!-- Private Nav -->
