@@ -33,7 +33,7 @@
   font-weight: 300;
 }
 
-#create-dialog textarea.mat-autosize {
+#create-dialog textarea .mat-autosize {
     resize: none;
     margin-left: 10px;
 }
@@ -126,3 +126,26 @@
 .datetime-input:focus{
     outline: none;
 }
+
+.unstyled::-webkit-inner-spin-button,
+.unstyled::-webkit-calendar-picker-indicator {
+    display: none !important;
+    -webkit-appearance: none !important;
+}
+
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none !important;
+    -webkit-appearance: none !important;
+}
+
+input[type="time"]::-webkit-inner-spin-button,
+input[type="time"]::-webkit-calendar-picker-indicator {
+    display: none !important;
+    -webkit-appearance: none !important;
+}
+
+.placeholder-fix:focus::-webkit-input-placeholder  {color:transparent !important;}
+.placeholder-fix:focus::-moz-placeholder   {color:transparent !important;}
+.placeholder-fix:-moz-placeholder   {color:transparent !important;}

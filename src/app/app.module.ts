@@ -15,7 +15,7 @@ import { UserLoginComponent } from './user-login/user-login.component'; // shoul
 import { HomeComponent } from './home/home.component' // should lazy load this
 import { EventComponent } from './event/event.component' // should lazy load this
 import { CreateComponent } from './shared/_directives/create/create.component'
-
+import { ShareComponent } from './shared/_directives/share/share.component'
 
 // core
 import { routing } from './app.routing';
@@ -42,6 +42,7 @@ import { AuthInterceptor } from './core/_helpers/auth.interceptor';
     UserLoginComponent,
     HomeComponent,
     CreateComponent,
+    ShareComponent,
     EventComponent
   ],
   imports: [
@@ -66,7 +67,8 @@ import { AuthInterceptor } from './core/_helpers/auth.interceptor';
     // {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
   ],
   entryComponents:[
-    CreateComponent
+    CreateComponent,
+    ShareComponent
   ],
   bootstrap: [AppComponent]
 })

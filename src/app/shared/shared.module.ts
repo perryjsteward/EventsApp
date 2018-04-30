@@ -7,7 +7,7 @@ import { User } from './_models/user.model';
 // components
 import { CallbackComponent } from './_directives/callback/callback.component';
 import { AmazingTimePickerModule } from 'amazing-time-picker';
-
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -16,11 +16,16 @@ import { AmazingTimePickerModule } from 'amazing-time-picker';
   ],
   imports: [
     MaterialModule,
-    AmazingTimePickerModule
+    AmazingTimePickerModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyD8J4ARTo1pUkjnw6BH46uxAdG1xF-js14',
+      libraries: ["places"]
+    })
   ],
   exports : [
     MaterialModule,
-    AmazingTimePickerModule
+    AmazingTimePickerModule,
+    AgmCoreModule
   ]
 })
 

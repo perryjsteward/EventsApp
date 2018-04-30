@@ -29,23 +29,28 @@
       <textarea [(ngModel)]="event.description" name="description"  id="event-description" matTextareaAutosize matInput placeholder="description"></textarea>
     </mat-form-field>
 
-    <mat-form-field *ngIf="extraOptions" class="input-full-width">
+    <mat-form-field [hidden]="!extraOptions" class="input-full-width">
       <mat-icon id="location" class="form-icon" matPrefix>location_on</mat-icon>
-      <input [(ngModel)]="event.location_string" name="location_string" matInput placeholder="location">
+      <!-- <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl"> -->
+      <input #search [formControl]="searchControl" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" [(ngModel)]="event.location_string" name="location_string" matInput placeholder="location">
     </mat-form-field>
 
     <div fxLayout="row">
       <mat-form-field fxFlex="50" class="input-full-width">
         <mat-icon class="form-icon" matPrefix>date_range</mat-icon>
-        <input required
+        <input required fxHide fxShow.gt-xs="true"
           [(ngModel)]="event.start_date"
           name="start_date" id="event-start-date"
           class="datetime-input" matInput [matDatepicker]="picker"
           placeholder="from" (click)="picker.open()"
           readonly="true">
-          <!-- <mat-error *ngIf="createFormControl.hasError('required')">
-            Start Date is <strong>required</strong>
-          </mat-error> -->
+          <input required fxShow fxShow.gt-xs="false"
+            [(ngModel)]="event.start_date"
+            type="date"
+            name="start_date" id="event-start-date"
+            class="datetime-input" matInput
+            placeholder="from">
+
         <mat-datepicker-toggle matSuffix [for]="picker">
           <mat-icon matDatepickerToggleIcon></mat-icon>
         </mat-datepicker-toggle>
@@ -53,7 +58,11 @@
       </mat-form-field>
 
       <mat-form-field fxFlex="50" class="input-full-width">
-        <input [(ngModel)]="event.end_date" name="end_date" id="event-end-date" class="datetime-input" matInput [matDatepicker]="picker2" placeholder="to" (click)="picker2.open()" readonly="true">
+        <input fxHide fxShow.gt-xs="true" [(ngModel)]="event.end_date" name="end_date" id="event-end-date" class="datetime-input" matInput [matDatepicker]="picker2" placeholder="to" (click)="picker2.open()" readonly="true">
+        <input fxShow fxShow.gt-xs="false" [(ngModel)]="event.end_date"
+          type="date"
+          name="end_date" id="event-end-date" class="datetime-input"
+          matInput placeholder="to">
         <mat-datepicker-toggle matSuffix [for]="picker2">
           <mat-icon matDatepickerToggleIcon></mat-icon>
         </mat-datepicker-toggle>
@@ -64,21 +73,35 @@
     <div fxLayout="row">
       <mat-form-field fxFlex="50" class="input-full-width">
         <mat-icon class="form-icon" matPrefix>av_timer</mat-icon>
-        <input required id="event-start-time" class="datetime-input"
+        <input fxHide fxShow.gt-xs="true"
+          required id="event-start-time" class="datetime-input unstyled"
           (click)="openTime('start_time')"
           [(ngModel)]="event.start_time"
           name="start_time"
           matInput placeholder="starting"
           readonly="true">
+          <input fxShow fxShow.gt-xs="false"
+            required id="event-start-time" class="datetime-input unstyled"
+            type="time"
+            [(ngModel)]="event.start_time"
+            name="start_time"
+            matInput placeholder="starting">
       </mat-form-field>
 
       <mat-form-field fxFlex="50" class="input-full-width">
-        <input id="event-end-time" class="datetime-input"
+        <input fxHide fxShow.gt-xs="true"
+          class="datetime-input unstyled"
           (click)="openTime('end_time')"
           [(ngModel)]="event.end_time"
           name="end_time"
           matInput placeholder="until"
           readonly="true">
+          <input fxShow fxShow.gt-xs="false"
+            class="datetime-input unstyled"
+            type="time"
+            [(ngModel)]="event.end_time"
+            name="end_time"
+            matInput placeholder="until">
       </mat-form-field>
     </div>
 

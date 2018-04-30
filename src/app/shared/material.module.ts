@@ -12,6 +12,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MatDatepickerModule } from '@angular/material';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   imports: [
@@ -26,7 +28,9 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatNativeDateModule,
     MatDatepickerModule,
     MatCheckboxModule,
-    FormsModule
+    FormsModule,
+    MatTooltipModule,
+    MatListModule
   ],
   exports : [
     MatToolbarModule,
@@ -40,7 +44,9 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatNativeDateModule,
     MatDatepickerModule,
     MatCheckboxModule,
-    FormsModule
+    FormsModule,
+    MatListModule,
+    MatTooltipModule
   ],
   declarations: []
 })

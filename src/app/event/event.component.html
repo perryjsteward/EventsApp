@@ -1,31 +1,142 @@
 <div class="wrapper">
 
-  <div class="event-image">
+  <!-- <div class="event-image"></div> -->
+
+   <div fxLayout class="event-container"
+      fxLayout.xs="column"
+      fxLayoutAlign="center"
+      fxLayoutGap.xs="0"
+      fxFlex.xs="100"
+      fxFlex.sm="560px"
+      fxFlex.md="760px"
+      fxFlex.gt-md="760px">
+
+       <div class="event-content">
+
+          <!-- event date variables -->
+          <p *ngIf="event" class="event-time">
+            <span> {{timeUntil(event.start_date)}} </span>
+            <span> - {{prettifyDate(event.start_date)}} {{event.start_time}} </span>
+            <span *ngIf="event.end_date"> - {{prettifyDate(event.end_date)}} </span>
+            <span *ngIf="event.end_time"> {{event.end_time}}</span>
+          </p>
+
+           <!-- event name and type information-->
+          <h1 *ngIf="event" class="event-name">
+            {{event.name}}
+          </h1>
+
+          <p fxLayout="column">
+            <span fxLayout="row">
+              Event - Public
+              <mat-icon class="help-icon" matTooltip="People who know the link to this event can see it">help_outline</mat-icon>
+            </span>
+            <span class="event-organiser">Unknown organiser</span>
+          </p>
+
+          <p fxLayout="column" class="event-share">
+            <a class='app-button button-outline' mat-button color="primary" (click)="openShareDialog()">
+              <mat-icon style="margin-right: 8px; font-size: 20px; margin-top: 1px;">share</mat-icon>
+              Share
+            </a>
+          </p>
+
+           <!-- event description -->
+           <p *ngIf="event && event.description" fxLayout="column" class="event-description">{{event.description}}</p>
+
+        </div> <!-- ./event-content -->
+
+  </div><!-- ./intro-container -->
+
+  <div *ngIf="lat && lng" class="event-map">
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="17" >
+      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+    </agm-map>
   </div>
 
-  <div class="intro-container"
-       fxLayout
-       fxLayout.xs="column"
-       fxLayoutGap.xs="0"
-       [fxFlex.xs]="100"
-       [fxFlex.sm]="100"
-       fxFlex.md="960px"
-       fxFlex.lg="1100px"
-       fxLayoutAlign="center">
+  <div fxLayout class="event-container"
+     fxLayout.xs="column"
+     fxLayoutAlign="center"
+     fxLayoutGap.xs="0"
+     fxFlex.xs="100"
+     fxFlex.sm="560px"
+     fxFlex.md="760px"
+     fxFlex.gt-md="760px"
+     style="margin-top: -15px;">
 
-       <div class="event-content"
-         fxFlex.xs="100"
-         fxFlex.sm="100"
-         fxFlex.md="60"
-         fxFlex.lg="60">
-        <h2>{{event.name}}</h2>
-      </div>
-      <div class="event-sidebar"
-        fxFlex.xs="100"
-        fxFlex.sm="100"
-        fxFlex.md="30"
-        fxFlex.lg="30">
-        test
-      </div>
+     <mat-list *ngIf="event" role="list" class="action-list">
+       <mat-list-item *ngIf="event.formatted_address" role="listitem" (click)="getDirections()">
+         <p class="disclaimer-ellipsis">{{event.formatted_address}}</p>
+         <div class="spacer"></div>
+         <mat-icon>keyboard_arrow_right</mat-icon>
+       </mat-list-item>
+       <mat-list-item role="listitem" (click)="openShareDialog()">
+          <h3>Invite Friends</h3>
+          <div class="spacer"></div>
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </mat-list-item>
+       <!-- <mat-list-item role="listitem" (click)="clicked()">
+         <h3>Add to Calendar</h3>
+         <div class="spacer"></div>
+         <mat-icon>keyboard_arrow_right</mat-icon>
+       </mat-list-item> -->
+       <mat-list-item *ngIf="event.owner" role="listitem" (click)="clicked()">
+         <h3>Contact Organizer</h3>
+         <div class="spacer"></div>
+         <mat-icon>keyboard_arrow_right</mat-icon>
+       </mat-list-item>
+       <mat-list-item role="listitem" (click)="reportEvent()">
+         <h3>Report Event</h3>
+         <div class="spacer"></div>
+         <mat-icon>keyboard_arrow_right</mat-icon>
+       </mat-list-item>
+     </mat-list>
   </div>
-</div>
+
+  <div fxLayout class="event-container"
+     fxLayout.xs="column"
+     fxLayoutAlign="center"
+     fxLayoutGap.xs="0"
+     fxFlex.xs="100"
+     fxFlex.sm="560px"
+     fxFlex.md="760px"
+     fxFlex.gt-md="760px"
+     style="margin-bottom:0px;">
+
+     <div fxLayout="row" class="disclaimer-container">
+      <div  *ngIf="!disclaimerFlag" class="disclaimer disclaimer-ellipsis">
+          Disclaimer: The information contained on https://www.eventsapp.co.uk website and EventsApp mobile app (the "Service") is for general information purposes only.
+
+          EventsApp assumes no responsibility for errors or omissions in the contents on the Service.
+
+          In no event shall EventsApp be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. EventsApp reserves the right to make additions, deletions, or modification to the contents on the Service at any time without prior notice.
+      </div>
+      <div  *ngIf="disclaimerFlag" class="disclaimer">
+        <p>
+          Disclaimer: The information contained on https://www.eventsapp.co.uk website and EventsApp mobile app (the "Service") is for general information purposes only.
+        </p>
+        <p>
+          EventsApp assumes no responsibility for errors or omissions in the contents on the Service.
+        </p>
+        <p>
+          In no event shall EventsApp be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. EventsApp reserves the right to make additions, deletions, or modification to the contents on the Service at any time without prior notice.
+        </p>
+      </div>
+      <mat-icon class="disclaimer-logo" fxFlex="30px" matDatepickerToggleIcon>security</mat-icon>
+    </div>
+
+  </div>
+  <div fxLayout class="event-container"
+     fxLayout.xs="column"
+     fxLayoutAlign="left"
+     fxLayoutGap.xs="0"
+     fxFlex.xs="100"
+     fxFlex.sm="560px"
+     fxFlex.md="760px"
+     fxFlex.gt-md="760px"
+     style="margin-top: 0px; margin-bottom: 25px;">
+
+    <a class="disclaimer-link" *ngIf="!disclaimerFlag" (click)="openDisclaimer()">read more</a>
+    <a class="disclaimer-link" *ngIf="disclaimerFlag" (click)="closeDisclaimer()">read less</a>
+  </div>
+</div><!-- ./wrapper -->

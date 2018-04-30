@@ -1,0 +1,38 @@
+<div class="close-dialog" fxLayoutAlign="end">
+  <button mat-icon-button mat-dialog-close fxFlexAlign="end">
+    <mat-icon aria-label="">close</mat-icon>
+  </button>
+</div>
+
+<div fxLayout="column" class="create-title">
+  <h1>Share</h1>
+  <p>Share this event with friends</p>
+</div>
+
+<mat-list role="list" class="action-list">
+  <mat-list-item  role="listitem" (click)="shareWhatsapp()">
+     <h3>Whatsapp</h3>
+     <div class="spacer"></div>
+     <mat-icon>keyboard_arrow_right</mat-icon>
+   </mat-list-item>
+  <!-- <mat-list-item role="listitem" (click)="clicked()">
+    <h3>Facebook Messenger</h3>
+    <div class="spacer"></div>
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </mat-list-item> -->
+  <mat-list-item role="listitem" (click)="shareEmail()">
+    <h3>Email</h3>
+    <div class="spacer"></div>
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </mat-list-item>
+  <mat-list-item role="listitem" (click)="shareURL()">
+    <h3>Share URL</h3>
+    <div class="spacer"></div>
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </mat-list-item>
+  <!-- <mat-list-item role="listitem" (click)="clicked()">
+    <h3>Text Message</h3>
+    <div class="spacer"></div>
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </mat-list-item> -->
+</mat-list>

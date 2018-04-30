@@ -20,6 +20,10 @@ body {
   height: calc(100vh - 125px) !important;
 }
 
+.spacer {
+  flex: 1 1 auto !important;
+}
+
 .hover:hover {
   cursor: pointer;
 }
@@ -49,6 +53,15 @@ h2 {
     margin: 0 0 10px;
 }
 
+h3 {
+  color: rgba(0,0,0,0.75);
+    font-family: 'HelveticaNeue-Thin', 'Helvetica Neue Light', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, 'Lucida Grande', sans-serif;
+    /* font-size: 38px; */
+    /* line-height: 44px; */
+    font-weight: 100;
+    margin: 0 0 10px;
+}
+
 .app-button-raised {
   background-color: #40D5C0 !important;
   font-weight: 300 !important;
@@ -58,6 +71,10 @@ h2 {
 .app-button {
   color: #40D5C0 !important;
   font-weight: 300 !important;
+}
+
+.button-outline {
+  border: 1px solid #40D5C0 !important;
 }
 
 .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
@@ -95,3 +112,4 @@ mat-dialog-container {
     position: relative !important;
     background-color: white;
 }
+[hidden] { display: none !important;}

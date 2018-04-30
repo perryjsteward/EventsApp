@@ -2,6 +2,7 @@ mat-toolbar {
   background: white;
   border-bottom: 0px solid !important;
   margin-bottom: 0px;
+  padding-top: 5px;
 }
 
 .app-font-weight {
@@ -25,9 +26,11 @@ mat-toolbar {
 }
 
 .app-name {
-  font-weight: lighter;
+  font-weight: lighter !important;
   font-size: 24px;
   vertical-align: super !important;
+  color: rgba(0,0,0,0.55);
+  font-family: 'HelveticaNeue-Thin', 'Helvetica Neue Light', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, 'Lucida Grande', sans-serif;
 }
 
 .navigation{
@@ -41,9 +44,7 @@ mat-toolbar {
   color: #696969;
 }
 
-.spacer {
-  flex: 1 1 auto;
-}
+
 
 ul {
     list-style-type: none;

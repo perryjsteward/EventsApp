@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
       this.navbar.classList.remove("sticky");
       this.body.style.marginTop = "0px";
     }
-    };
+  };
 
   logout(){
     //should refactor this to be the user service logging out when the button is clicked (dumb component)
@@ -47,6 +47,11 @@ export class HeaderComponent implements OnInit {
 
   goHome(){
     this.router.navigate(['/']);
+  }
+
+  isViewPage(){
+    let url = this.router.url.split("?");
+    return url[0] == "/view"
   }
 
   openCreateDialog(): void {
