@@ -29,6 +29,24 @@ export class HeaderComponent implements OnInit {
     window.removeEventListener('scroll', this.scroll, true);
   }
 
+  googleAnalytics(){
+    (<any>window).ga('send', 'event', {
+      eventCategory: 'Navigation',
+      eventLabel: 'Create Event',
+      eventAction: 'CreateEvent',
+      eventValue: 10
+    });
+  }
+
+  goHomeGA(){
+    (<any>window).ga('send', 'event', {
+      eventCategory: 'Navigation',
+      eventLabel: 'Logo Event',
+      eventAction: 'LogoEvent',
+      eventValue: 10
+    });
+  }
+
   scroll = (): void => {
     if (window.pageYOffset > this.sticky) {
       this.navbar.classList.add("sticky")

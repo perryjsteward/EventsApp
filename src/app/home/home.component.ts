@@ -15,6 +15,15 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  createEventGA(){
+    (<any>window).ga('send', 'event', {
+      eventCategory: 'Home',
+      eventLabel: 'Create event',
+      eventAction: 'CreateEvent',
+      eventValue: 10
+    });
+  }
+
   openCreateDialog(): void {
     let dialogRef = this.dialog.open(CreateComponent, {
       width: '100%',

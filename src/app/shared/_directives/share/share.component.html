@@ -10,7 +10,7 @@
 </div>
 
 <mat-list role="list" class="action-list">
-  <mat-list-item  role="listitem" (click)="shareWhatsapp()">
+  <mat-list-item  role="listitem" (click)="shareWhatsapp(); shareWhatsappGA()">
      <h3>Whatsapp</h3>
      <div class="spacer"></div>
      <mat-icon>keyboard_arrow_right</mat-icon>
@@ -20,12 +20,12 @@
     <div class="spacer"></div>
     <mat-icon>keyboard_arrow_right</mat-icon>
   </mat-list-item> -->
-  <mat-list-item role="listitem" (click)="shareEmail()">
+  <mat-list-item role="listitem" (click)="shareEmail(); shareEmailGA()">
     <h3>Email</h3>
     <div class="spacer"></div>
     <mat-icon>keyboard_arrow_right</mat-icon>
   </mat-list-item>
-  <mat-list-item role="listitem" (click)="shareURL()">
+  <mat-list-item role="listitem" (click)="shareURL(); shareUrlGA()">
     <h3>Share URL</h3>
     <div class="spacer"></div>
     <mat-icon>keyboard_arrow_right</mat-icon>

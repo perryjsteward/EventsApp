@@ -18,8 +18,10 @@ export class ShareComponent implements OnInit {
   messageBody: any;
 
 
-  constructor(public dialogRef: MatDialogRef<ShareComponent>,
+  constructor(public router: Router, public dialogRef: MatDialogRef<ShareComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
+      (<any>window).ga('set', 'page', '/share');
+      (<any>window).ga('send', 'pageview');
   }
 
   ngOnInit() {
@@ -59,6 +61,40 @@ export class ShareComponent implements OnInit {
 
     /* Alert the copied text */
     alert("Copied the URL!");
+  }
+
+  shareWhatsappGA(){
+    (<any>window).ga('send', 'event', {
+      eventCategory: 'Share',
+      eventLabel: 'Whatsapp',
+      eventAction: 'ShareWhatsappEvent',
+      eventValue: 10
+    });
+  }
+
+  shareEmailGA(){
+    (<any>window).ga('send', 'event', {
+      eventCategory: 'Share',
+      eventLabel: 'Email',
+      eventAction: 'ShareEmailEvent',
+      eventValue: 10
+    });
+  }
+
+  shareUrlGA(){
+    (<any>window).ga('send', 'event', {
+      eventCategory: 'Share',
+      eventLabel: 'URL',
+      eventAction: 'ShareUrlEvent',
+      eventValue: 10
+    });
+  }
+
+
+  ngOnDestroy() {
+    let url: string = this.router.url.substring(0, this.router.url.indexOf("?"));
+    (<any>window).ga('set', 'page', url);
+    (<any>window).ga('send', 'pageview');
   }
 
 }

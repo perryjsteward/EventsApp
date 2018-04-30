@@ -32,6 +32,8 @@ export class CreateComponent implements OnInit {
 
 
   constructor(private mapsAPILoader: MapsAPILoader, private ngZone: NgZone, private router: Router, public dialog: MatDialog, private atp: AmazingTimePickerService, private eventsService: EventService) {
+    (<any>window).ga('set', 'page', '/create');
+    (<any>window).ga('send', 'pageview');
   }
 
   ngOnInit() {
@@ -109,7 +111,7 @@ export class CreateComponent implements OnInit {
     this.eventsService.create(form.value)
         .subscribe(response => {
            if(response.event_id){
-             console.log(btoa(response.event_id))
+             this.submitFormGA();
              this.router.navigate(['/view'],{ queryParams: { id: btoa(response.event_id) } });
              this.dialog.closeAll();
            }
@@ -133,8 +135,29 @@ export class CreateComponent implements OnInit {
     this.extraOptions = false;
   }
 
+  moreInfoGA(){
+    (<any>window).ga('send', 'event', {
+      eventCategory: 'Create Form',
+      eventLabel: 'More options',
+      eventAction: 'MoreOptionsEvent',
+      eventValue: 10
+    });
+  }
+
+  submitFormGA(){
+    (<any>window).ga('send', 'event', {
+      eventCategory: 'Create Form',
+      eventLabel: 'Submission',
+      eventAction: 'SubmissionEvent',
+      eventValue: 10
+    });
+  }
+
   ngOnDestroy() {
     this.event = {};
+    let url: string = this.router.url.substring(0, this.router.url.indexOf("?"));
+    (<any>window).ga('set', 'page', url);
+    (<any>window).ga('send', 'pageview');
   }
 
 }

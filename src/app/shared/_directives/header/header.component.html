@@ -1,7 +1,7 @@
 <mat-toolbar class="fixed-header" id="app-header">
   <mat-toolbar-row>
 
-    <span (click)="goHome()" class="hover">
+    <span (click)="goHome(); goHomeGA()" class="hover">
       <img class="app-logo" src="/assets/events_app_logo.svg"/>
       <span class="app-name">EventsApp</span>
     </span>
@@ -40,7 +40,7 @@
       </div> -->
       <!-- <a *ngIf="isViewPage()" class='app-button-raised' mat-button color="primary">Share</a> -->
       <!-- <a *ngIf="isViewPage()" class='app-button' mat-button color="primary" (click)="goHome()">About</a> -->
-      <a class='app-button' mat-button color="primary" (click)="openCreateDialog()">Create Event</a>
+      <a class='app-button' mat-button color="primary" (click)="openCreateDialog(); googleAnalytics()">Create Event</a>
 
   </mat-toolbar-row>
 </mat-toolbar>

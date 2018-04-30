@@ -35,7 +35,7 @@
           </p>
 
           <p fxLayout="column" class="event-share">
-            <a class='app-button button-outline' mat-button color="primary" (click)="openShareDialog()">
+            <a class='app-button button-outline' mat-button color="primary" (click)="openShareDialog(); shareGlobalGA()">
               <mat-icon style="margin-right: 8px; font-size: 20px; margin-top: 1px;">share</mat-icon>
               Share
             </a>
@@ -65,12 +65,12 @@
      style="margin-top: -15px;">
 
      <mat-list *ngIf="event" role="list" class="action-list">
-       <mat-list-item *ngIf="event.formatted_address" role="listitem" (click)="getDirections()">
+       <mat-list-item *ngIf="event.formatted_address" role="listitem" (click)="getDirections(); getDirectionsGA()">
          <p class="disclaimer-ellipsis">{{event.formatted_address}}</p>
          <div class="spacer"></div>
          <mat-icon>keyboard_arrow_right</mat-icon>
        </mat-list-item>
-       <mat-list-item role="listitem" (click)="openShareDialog()">
+       <mat-list-item role="listitem" (click)="openShareDialog(); shareListGA()">
           <h3>Invite Friends</h3>
           <div class="spacer"></div>
           <mat-icon>keyboard_arrow_right</mat-icon>
@@ -85,7 +85,7 @@
          <div class="spacer"></div>
          <mat-icon>keyboard_arrow_right</mat-icon>
        </mat-list-item>
-       <mat-list-item role="listitem" (click)="reportEvent()">
+       <mat-list-item role="listitem" (click)="reportEvent(); reportGA()">
          <h3>Report Event</h3>
          <div class="spacer"></div>
          <mat-icon>keyboard_arrow_right</mat-icon>

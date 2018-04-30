@@ -36,6 +36,42 @@ export class EventComponent implements OnInit {
     });
   }
 
+  shareGlobalGA(){
+    (<any>window).ga('send', 'event', {
+      eventCategory: 'View',
+      eventLabel: 'Share - Global',
+      eventAction: 'ShareEvent',
+      eventValue: 10
+    });
+  }
+
+  shareListGA(){
+    (<any>window).ga('send', 'event', {
+      eventCategory: 'View',
+      eventLabel: 'Share - List',
+      eventAction: 'ShareEvent',
+      eventValue: 10
+    });
+  }
+
+  reportGA(){
+    (<any>window).ga('send', 'event', {
+      eventCategory: 'View',
+      eventLabel: 'Report - List',
+      eventAction: 'ReportEvent',
+      eventValue: 10
+    });
+  }
+
+  getDirectionsGA(){
+    (<any>window).ga('send', 'event', {
+      eventCategory: 'View',
+      eventLabel: 'Google Directions - List',
+      eventAction: 'GetGoogleDirectionsEvent',
+      eventValue: 10
+    });
+  }
+
   timeUntil(start_date){
       return moment(start_date).fromNow();
   }
@@ -90,7 +126,7 @@ export class EventComponent implements OnInit {
   }
 
   getDirections(){
-    window.location.href = "http://maps.google.com/?saddr=My+Location&daddr=" + this.event.formatted_address;
+    window.location.href = "http://maps.google.com/?saddr=location&daddr=" + this.event.formatted_address;
   }
 
   reportEvent(){
