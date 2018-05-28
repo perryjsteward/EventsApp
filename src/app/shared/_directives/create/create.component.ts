@@ -107,15 +107,17 @@ export class CreateComponent implements OnInit {
         form.value['lat'] = this.selectedLocation.geometry.location.lat();
         form.value['lng'] = this.selectedLocation.geometry.location.lng();
     }
+
+    console.log(form.value)
     // upload event
-    this.eventsService.create(form.value)
-        .subscribe(response => {
-           if(response.event_id){
-             this.submitFormGA();
-             this.router.navigate(['/view'],{ queryParams: { id: btoa(response.event_id) } });
-             this.dialog.closeAll();
-           }
-        });
+    // this.eventsService.create(form.value)
+    //     .subscribe(response => {
+    //        if(response.event_id){
+    //          this.submitFormGA();
+    //          this.router.navigate(['/view'],{ queryParams: { id: btoa(response.event_id) } });
+    //          this.dialog.closeAll();
+    //        }
+    //     });
   }
 
   openDisclaimer(){

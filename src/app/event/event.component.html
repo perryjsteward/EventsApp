@@ -37,7 +37,7 @@
           <p fxLayout="column" class="event-share">
             <a class='app-button button-outline' mat-button color="primary" (click)="openShareDialog(); shareGlobalGA()">
               <mat-icon style="margin-right: 8px; font-size: 20px; margin-top: 1px;">share</mat-icon>
-              Share
+              Share with Friends
             </a>
           </p>
 
@@ -70,6 +70,11 @@
          <div class="spacer"></div>
          <mat-icon>keyboard_arrow_right</mat-icon>
        </mat-list-item>
+       <mat-list-item role="listitem" (click)="saveEvent(); saveEventGA()">
+          <h3>Add to Calendar</h3>
+          <div class="spacer"></div>
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </mat-list-item>
        <mat-list-item role="listitem" (click)="openShareDialog(); shareListGA()">
           <h3>Invite Friends</h3>
           <div class="spacer"></div>

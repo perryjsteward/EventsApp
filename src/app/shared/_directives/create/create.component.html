@@ -111,7 +111,7 @@
 
 
     <div class="form-actions" fxLayout="row" fxLayoutAlign="center center">
-      <button *ngIf="!extraOptions" class="app-button" mat-button color="primary" (click)="openOptions(); moreInfoGA">more options</button>
+      <button *ngIf="!extraOptions" class="app-button" mat-button color="primary" (click)="openOptions(); moreInfoGA()">more options</button>
       <button *ngIf="extraOptions" class="app-button" mat-button color="primary" (click)="closeOptions()">less options</button>
       <button *ngIf="validForm()" type="submit" class="app-button-raised" mat-raised-button color="primary">Finish</button>
       <button *ngIf="!validForm()" type="submit" mat-raised-button color="primary" disabled>Finish</button>
