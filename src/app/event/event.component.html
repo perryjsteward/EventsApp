@@ -44,6 +44,16 @@
            <!-- event description -->
            <p *ngIf="event && event.description" fxLayout="column" class="event-description">{{event.description}}</p>
 
+           <div title="Add to Calendar" class="addeventatc">
+               Add to Calendar
+               <span class="start">{{event.start_date}}</span>
+               <span class="end">{{event.end_date}}</span>
+               <span class="timezone"></span>
+               <span class="title">{{event.name}}</span>
+               <span class="description">Description of the event</span>
+               <span class="location">{{event.formatted_address}}</span>
+           </div>
+
         </div> <!-- ./event-content -->
 
   </div><!-- ./intro-container -->
@@ -70,11 +80,9 @@
          <div class="spacer"></div>
          <mat-icon>keyboard_arrow_right</mat-icon>
        </mat-list-item>
-       <mat-list-item role="listitem" (click)="saveEvent(); saveEventGA()">
-          <h3>Add to Calendar</h3>
-          <div class="spacer"></div>
-          <mat-icon>keyboard_arrow_right</mat-icon>
-        </mat-list-item>
+       <!-- <mat-list-item role="listitem" (click)="saveEvent(); saveEventGA()"> -->
+       <!-- <mat-list-item role="listitem"> -->
+        <!-- </mat-list-item> -->
        <mat-list-item role="listitem" (click)="openShareDialog(); shareListGA()">
           <h3>Invite Friends</h3>
           <div class="spacer"></div>
@@ -97,6 +105,7 @@
        </mat-list-item>
      </mat-list>
   </div>
+
 
   <div fxLayout class="event-container"
      fxLayout.xs="column"

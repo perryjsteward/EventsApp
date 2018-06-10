@@ -6,7 +6,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MapsAPILoader } from '@agm/core';
 import { } from 'googlemaps';
 import * as ICS from 'ics-js';
-
+import { saveAs } from 'file-saver/FileSaver';
 import * as moment from 'moment';
 
 @Component({
@@ -123,22 +123,39 @@ export class EventComponent implements OnInit {
       description = this.event.description.substring(0, 70) + '...';
     }
 
-    cal.addProp('VERSION', 2) // Number(2) is converted to '2.0'
-    cal.addProp('PRODID', 'XYZ Corp');
+    // cal.addProp('VERSION', 2) // Number(2) is converted to '2.0'
+    // cal.addProp('PRODID', 'XYZ Corp');
     // cal.addProp('DTSTART', this.event.start_date);
 
-    event.addProp('UID', this.event.event_id);
-    event.addProp('DTSTAMP', moment(this.event.start_date).toDate(), { VALUE: 'DATE-TIME' });
-    event.addProp('DTSTART', moment(this.event.start_date).toDate());
-    event.addProp('DTEND', moment(this.event.end_date).toDate());
-    event.addProp('DESCRIPTION', description);
-    event.addProp('SUMMARY', this.event.name);
-    event.addProp('LOCATION', this.event.formatted_address.replace(",",""));
-    event.addProp('URL', window.location.host + '/view?id=' + btoa(this.event.event_id));
+    // event.addProp('UID', this.event.event_id);
+    // event.addProp('DTSTAMP', moment.utc(this.event.start_date).format(),{ VALUE: 'DATE-TIME' };
+    // event.addProp('DTSTART', moment(this.event.start_date).toDate());
+    // event.addProp('DTEND', moment(this.event.end_date).toDate());
+    // event.addProp('DESCRIPTION', escape(description));
+    // event.addProp('SUMMARY', escape(this.event.name));
+    // event.addProp('LOCATION', escape(this.event.formatted_address.replace(",","")));
+    // event.addProp('URL', window.location.host + '/view?id=' + btoa(this.event.event_id));
 
     cal.addComponent(event);
-    console.log(cal.toString())
-    window.open( "data:text/calendar;charset=utf8," + cal.toString());
+
+    var iCalendarData = [
+        'BEGIN:VCALENDAR',
+        'CALSCALE:GREGORIAN',
+        'PRODID:-//Example Inc.//Example Calendar//EN',
+        'VERSION:2.0',
+        'BEGIN:VEVENT',
+        'DTSTAMP:20080205T191224Z',
+        'DTSTART:20081006',
+        'SUMMARY:Planning meeting',
+        'UID:4088E990AD89CB3DBB484909',
+        'END:VEVENT',
+        'END:VCALENDAR'
+    ].join("\r\n");
+
+    // let file = new Blob([iCalendarData], { type: 'text/calendar;charset=utf-8' });
+    // saveAs(file, 'helloworld.ics')
+    // window.open("data:text/calendar; base64," + btoa(cal.toString()));
+    window.location.href = "data:text/calendar; base64," + btoa(iCalendarData);
   }
 
 
