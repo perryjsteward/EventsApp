@@ -9,12 +9,15 @@ import { CallbackComponent } from './_directives/callback/callback.component';
 import { AmazingTimePickerModule } from 'amazing-time-picker';
 import { AgmCoreModule } from '@agm/core';
 
+import { ClipboardModule } from 'ngx-clipboard';
+
 @NgModule({
   declarations: [
     // HeaderComponent
     CallbackComponent
   ],
   imports: [
+    ClipboardModule,
     MaterialModule,
     AmazingTimePickerModule,
     AgmCoreModule.forRoot({
@@ -23,6 +26,7 @@ import { AgmCoreModule } from '@agm/core';
     })
   ],
   exports : [
+    ClipboardModule,
     MaterialModule,
     AmazingTimePickerModule,
     AgmCoreModule

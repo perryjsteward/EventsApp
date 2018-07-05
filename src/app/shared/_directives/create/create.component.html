@@ -1,16 +1,18 @@
 <div id="create-dialog">
+  <div class="title-background">
+    <div class="close-dialog" fxLayoutAlign="end">
+      <button mat-icon-button mat-dialog-close fxFlexAlign="end">
+        <mat-icon aria-label="">close</mat-icon>
+      </button>
+    </div>
 
-  <div class="close-dialog" fxLayoutAlign="end">
-    <button mat-icon-button mat-dialog-close fxFlexAlign="end">
-      <mat-icon aria-label="">close</mat-icon>
-    </button>
+    <div fxLayout="column" class="create-title">
+      <h1>Create</h1>
+      <p>A new event to share with friends</p>
+    </div>
   </div>
 
-  <div fxLayout="column" class="create-title">
-    <h1>Create</h1>
-    <p>Set up a new event & share with friends</p>
-  </div>
-
+  <div class="container">
   <form #createEvent="ngForm" class="create-form" (ngSubmit)="onSubmit(createEvent)">
     <mat-form-field class="input-full-width">
       <mat-icon class="form-icon" matPrefix>note_add</mat-icon>
@@ -26,17 +28,19 @@
 
     <mat-form-field *ngIf="extraOptions" class="input-full-width">
       <mat-icon class="form-icon" matPrefix>create</mat-icon>
-      <textarea [(ngModel)]="event.description" name="description"  id="event-description" matTextareaAutosize matInput placeholder="description"></textarea>
+      <textarea [(ngModel)]="event.description" name="description" id="event-description" matTextareaAutosize matInput placeholder="description"></textarea>
     </mat-form-field>
 
     <mat-form-field [hidden]="!extraOptions" class="input-full-width">
-      <mat-icon id="location" class="form-icon" matPrefix>location_on</mat-icon>
-      <!-- <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl"> -->
-      <input #search [formControl]="searchControl" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" [(ngModel)]="event.location_string" name="location_string" matInput placeholder="location">
+      <mat-icon class="form-icon" matPrefix>location_on</mat-icon>
+      <input #search [formControl]="searchControl" autocorrect="off"
+      autocapitalize="off" spellcheck="off" type="text" [(ngModel)]="event.location_string"
+      name="location_string" id="location_string" matInput placeholder="location">
+
     </mat-form-field>
 
     <div fxLayout="row">
-      <mat-form-field fxFlex="50" class="input-full-width">
+      <mat-form-field *ngIf="!extraOptions" fxFlex="100" class="input-full-width">
         <mat-icon class="form-icon" matPrefix>date_range</mat-icon>
         <input required fxHide fxShow.gt-xs="true"
           [(ngModel)]="event.start_date"
@@ -57,7 +61,28 @@
         <mat-datepicker touchUi="true" #picker></mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field fxFlex="50" class="input-full-width">
+      <mat-form-field *ngIf="extraOptions" fxFlex="50" class="input-full-width">
+        <mat-icon class="form-icon" matPrefix>date_range</mat-icon>
+        <input required fxHide fxShow.gt-xs="true"
+          [(ngModel)]="event.start_date"
+          name="start_date" id="event-start-date"
+          class="datetime-input" matInput [matDatepicker]="picker"
+          placeholder="from" (click)="picker.open()"
+          readonly="true">
+          <input required fxShow fxShow.gt-xs="false"
+            [(ngModel)]="event.start_date"
+            type="date"
+            name="start_date" id="event-start-date"
+            class="datetime-input" matInput
+            placeholder="from">
+
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon></mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker touchUi="true" #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="extraOptions" fxFlex="50" class="input-full-width">
         <input fxHide fxShow.gt-xs="true" [(ngModel)]="event.end_date" name="end_date" id="event-end-date" class="datetime-input" matInput [matDatepicker]="picker2" placeholder="to" (click)="picker2.open()" readonly="true">
         <input fxShow fxShow.gt-xs="false" [(ngModel)]="event.end_date"
           type="date"
@@ -71,7 +96,7 @@
     </div>
 
     <div fxLayout="row">
-      <mat-form-field fxFlex="50" class="input-full-width">
+      <mat-form-field *ngIf="!extraOptions" fxFlex="100" class="input-full-width">
         <mat-icon class="form-icon" matPrefix>av_timer</mat-icon>
         <input fxHide fxShow.gt-xs="true"
           required id="event-start-time" class="datetime-input unstyled"
@@ -88,7 +113,24 @@
             matInput placeholder="starting">
       </mat-form-field>
 
-      <mat-form-field fxFlex="50" class="input-full-width">
+      <mat-form-field *ngIf="extraOptions" fxFlex="50" class="input-full-width">
+        <mat-icon class="form-icon" matPrefix>av_timer</mat-icon>
+        <input fxHide fxShow.gt-xs="true"
+          required id="event-start-time" class="datetime-input unstyled"
+          (click)="openTime('start_time')"
+          [(ngModel)]="event.start_time"
+          name="start_time"
+          matInput placeholder="starting"
+          readonly="true">
+          <input fxShow fxShow.gt-xs="false"
+            required id="event-start-time" class="datetime-input unstyled"
+            type="time"
+            [(ngModel)]="event.start_time"
+            name="start_time"
+            matInput placeholder="starting">
+      </mat-form-field>
+
+      <mat-form-field *ngIf="extraOptions" fxFlex="50" class="input-full-width">
         <input fxHide fxShow.gt-xs="true"
           class="datetime-input unstyled"
           (click)="openTime('end_time')"
@@ -111,10 +153,10 @@
 
 
     <div class="form-actions" fxLayout="row" fxLayoutAlign="center center">
-      <button *ngIf="!extraOptions" class="app-button" mat-button color="primary" (click)="openOptions(); moreInfoGA()">more options</button>
-      <button *ngIf="extraOptions" class="app-button" mat-button color="primary" (click)="closeOptions()">less options</button>
-      <button *ngIf="validForm()" type="submit" class="app-button-raised" mat-raised-button color="primary">Finish</button>
-      <button *ngIf="!validForm()" type="submit" mat-raised-button color="primary" disabled>Finish</button>
+      <button *ngIf="!extraOptions" class="app-button more-options" mat-button color="primary" (click)="openOptions(); moreInfoGA()">more options</button>
+      <button *ngIf="extraOptions" class="app-button more-options" mat-button color="primary" (click)="closeOptions()">less options</button>
+      <button *ngIf="validForm()" type="submit" class="button-pill button-red" mat-raised-button color="primary">Finish</button>
+      <button *ngIf="!validForm()" type="submit" class="button-pill button-red button-disabled" mat-raised-button color="primary" disabled>Finish</button>
     </div>
 
 
@@ -146,6 +188,5 @@
   <a class="disclaimer-link" *ngIf="!disclaimerFlag" (click)="openDisclaimer()">read more</a>
   <a class="disclaimer-link" *ngIf="disclaimerFlag" (click)="closeDisclaimer()">read less</a>
 
-  <p>&nbsp;</p>
-
+  </div>
 </div>

@@ -8,6 +8,7 @@ import { } from 'googlemaps';
 import * as ICS from 'ics-js';
 import { saveAs } from 'file-saver/FileSaver';
 import * as moment from 'moment';
+import {ChangeDetectorRef} from '@angular/core';
 
 @Component({
   selector: 'app-event',
@@ -22,15 +23,17 @@ export class EventComponent implements OnInit {
   lng: number;
   zoom: number = 10;
   disclaimerFlag = false;
+  extraDescription = false;
   userLocation: any;
+  shareUrl: any;
 
-  constructor(private mapsAPILoader: MapsAPILoader, private router: Router,public dialog: MatDialog, private eventService: EventService, private activatedRoute: ActivatedRoute) { }
+  constructor(private cd : ChangeDetectorRef, private mapsAPILoader: MapsAPILoader, private router: Router,public dialog: MatDialog, private eventService: EventService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+
     if(navigator.geolocation){
       navigator.geolocation.getCurrentPosition(this.setPosition.bind(this));
       };
-
 
     this.activatedRoute.queryParams.subscribe(params => {
         if(params.id && params.id != ''){
@@ -42,10 +45,25 @@ export class EventComponent implements OnInit {
     });
   }
 
+  eventImage(){
+    return 'bg-5'
+  }
+
   setPosition(position){
       this.userLocation = position.coords;
   }
 
+  likeEvent(){
+    if(this.event.event_likes){
+      this.event.event_likes = this.event.event_likes + 1;
+    } else {
+      this.event.event_likes = 1;
+    }
+    this.eventService.update(this.event)
+        .subscribe(response => {
+          console.log(response)
+        })
+  }
 
   shareGlobalGA(){
     (<any>window).ga('send', 'event', {
@@ -83,6 +101,24 @@ export class EventComponent implements OnInit {
     });
   }
 
+  issueGA(){
+    (<any>window).ga('send', 'event', {
+      eventCategory: 'View',
+      eventLabel: 'Issue - List',
+      eventAction: 'EventIssue',
+      eventValue: 10
+    });
+  }
+
+  likeEventGA(){
+    (<any>window).ga('send', 'event', {
+      eventCategory: 'View',
+      eventLabel: 'Like - Event',
+      eventAction: 'likeEvent',
+      eventValue: 10
+    });
+  }
+
   getDirectionsGA(){
     (<any>window).ga('send', 'event', {
       eventCategory: 'View',
@@ -109,59 +145,90 @@ export class EventComponent implements OnInit {
         .subscribe(response => {
           console.log(response)
           this.event = response.events[0];
+          this.getShareContent();
           this.updateMap(this.event);
+          this.cd.detectChanges();
         })
   }
 
-  saveEvent(){
-    console.log(this.event)
-    const cal = new ICS.VCALENDAR();
-    const event = new ICS.VEVENT();
+  getCalendarDescription(){
+    if(this.event && this.event.description){
+      var old_description, new_description;
+      old_description = this.event.description;
 
-    var description;
-    if(this.event.description.length >= 70) {
-      description = this.event.description.substring(0, 70) + '...';
+      if(old_description.length >= 140) {
+        new_description = old_description.substring(0, 140) + '...';
+        return new_description + "\n\n" + this.getEventUrl();
+      }
+      else {
+        return old_description + "\n\n" + this.getEventUrl();
+      }
+    } else {
+      return this.getEventUrl();
     }
-
-    // cal.addProp('VERSION', 2) // Number(2) is converted to '2.0'
-    // cal.addProp('PRODID', 'XYZ Corp');
-    // cal.addProp('DTSTART', this.event.start_date);
-
-    // event.addProp('UID', this.event.event_id);
-    // event.addProp('DTSTAMP', moment.utc(this.event.start_date).format(),{ VALUE: 'DATE-TIME' };
-    // event.addProp('DTSTART', moment(this.event.start_date).toDate());
-    // event.addProp('DTEND', moment(this.event.end_date).toDate());
-    // event.addProp('DESCRIPTION', escape(description));
-    // event.addProp('SUMMARY', escape(this.event.name));
-    // event.addProp('LOCATION', escape(this.event.formatted_address.replace(",","")));
-    // event.addProp('URL', window.location.host + '/view?id=' + btoa(this.event.event_id));
-
-    cal.addComponent(event);
-
-    var iCalendarData = [
-        'BEGIN:VCALENDAR',
-        'CALSCALE:GREGORIAN',
-        'PRODID:-//Example Inc.//Example Calendar//EN',
-        'VERSION:2.0',
-        'BEGIN:VEVENT',
-        'DTSTAMP:20080205T191224Z',
-        'DTSTART:20081006',
-        'SUMMARY:Planning meeting',
-        'UID:4088E990AD89CB3DBB484909',
-        'END:VEVENT',
-        'END:VCALENDAR'
-    ].join("\r\n");
-
-    // let file = new Blob([iCalendarData], { type: 'text/calendar;charset=utf-8' });
-    // saveAs(file, 'helloworld.ics')
-    // window.open("data:text/calendar; base64," + btoa(cal.toString()));
-    window.location.href = "data:text/calendar; base64," + btoa(iCalendarData);
   }
+
+  getEventUrl(){
+    return window.location.host + '/view?id=' + btoa(this.event.event_id);
+  }
+
+  getStartDateTime(){
+    if(this.event){
+      let datetime = moment.utc(this.event.start_date + " " + this.event.start_time);
+      return datetime.format()
+    }
+  }
+
+  limitedDescription(data){
+    if(data.length >= 140) {
+      data = data.substring(0, 140) + '...';
+      return data;
+    }
+    else {
+      return data;
+    }
+  }
+
+  largeDescription(data){
+    if(data.length >= 140) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  getEndDateTime(){
+    if(this.event){
+      if(this.event.end_date && this.event.end_time){
+        let datetime = moment.utc(this.event.end_date + " " + this.event.end_time);
+        return datetime.format()
+      }
+      if(this.event.end_date && !this.event.end_time){
+        let datetime = moment.utc(this.event.end_date);
+        return datetime.format()
+      }
+      if(!this.event.end_date && this.event.end_time){
+        if(this.event.end_time < this.event.start_time){
+          let datetime = moment.utc(this.event.start_date + " " + this.event.end_time).add(24, 'hours');
+          return datetime.format()
+        } else {
+          let datetime = moment.utc(this.event.start_date + " " + this.event.end_time);
+          return datetime.format()
+        }
+      }
+    }
+  }
+
 
 
   updateMap(event){
     this.lat = parseFloat(event.lat);
     this.lng = parseFloat(event.lng);
+  }
+
+  shareAlert(){
+    alert("I've copied the URL!");
   }
 
 
@@ -188,6 +255,14 @@ export class EventComponent implements OnInit {
     this.disclaimerFlag = false;
   }
 
+  openDescription(){
+    this.extraDescription = true;
+  }
+
+  closeDescription(){
+    this.extraDescription = false;
+  }
+
   getDirections(){
     window.location.href = "http://maps.google.com/?saddr=" + this.userLocation.latitude + "," + this.userLocation.longitude +"&daddr=" + this.event.formatted_address;
   }
@@ -195,5 +270,15 @@ export class EventComponent implements OnInit {
   reportEvent(){
     var subject = encodeURI("Report Event: " + this.event.event_id)
     window.location.href = "mailto:help.eventsapp@gmail.com?Subject=" + subject;
+  }
+
+  eventIssue(){
+    var subject = encodeURI("Somethings gone wrong: " + this.event.event_id)
+    window.location.href = "mailto:help.eventsapp@gmail.com?Subject=" + subject;
+  }
+
+  getShareContent(){
+    this.shareUrl = "Hey there, you have an invite waiting for you at EventsApp. Check it out below! \n\n" + this.getEventUrl();
+
   }
 }

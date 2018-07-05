@@ -1,8 +1,11 @@
 <div class="wrapper">
 
   <!-- <div class="event-image"></div> -->
+<div class="bg" [ngClass]="eventImage()">
 
-   <div fxLayout class="event-container"
+</div>
+
+   <div fxLayout class="event-container extra-padding"
       fxLayout.xs="column"
       fxLayoutAlign="center"
       fxLayoutGap.xs="0"
@@ -12,47 +15,70 @@
       fxFlex.gt-md="760px">
 
        <div class="event-content">
-
-          <!-- event date variables -->
-          <p *ngIf="event" class="event-time">
-            <span> {{timeUntil(event.start_date)}} </span>
-            <span> - {{prettifyDate(event.start_date)}} {{event.start_time}} </span>
-            <span *ngIf="event.end_date"> - {{prettifyDate(event.end_date)}} </span>
-            <span *ngIf="event.end_time"> {{event.end_time}}</span>
-          </p>
-
-           <!-- event name and type information-->
           <h1 *ngIf="event" class="event-name">
             {{event.name}}
           </h1>
+          <!-- event date variables -->
+          <p *ngIf="event" class="event-time">
+            <span *ngIf="event.start_date && event.start_time">{{prettifyDate(event.start_date)}} {{event.start_time}} </span>
+            <span *ngIf="event.end_date || event.end_time">-</span>
+            <span *ngIf="event.end_date"> {{prettifyDate(event.end_date)}} </span>
+            <span *ngIf="event.end_time"> {{event.end_time}}</span>
+          </p>
 
-          <p fxLayout="column">
+          <p></p>
+
+           <!-- event name and type information-->
+          <!-- <p fxLayout="column" class="event-type">
             <span fxLayout="row">
               Event - Public
               <mat-icon class="help-icon" matTooltip="People who know the link to this event can see it">help_outline</mat-icon>
-            </span>
-            <span class="event-organiser">Unknown organiser</span>
-          </p>
+            </span> -->
+            <!-- <span class="event-organiser">Unknown organiser</span> -->
+          <!-- </p> -->
 
-          <p fxLayout="column" class="event-share">
-            <a class='app-button button-outline' mat-button color="primary" (click)="openShareDialog(); shareGlobalGA()">
-              <mat-icon style="margin-right: 8px; font-size: 20px; margin-top: 1px;">share</mat-icon>
-              Share with Friends
-            </a>
-          </p>
+          <div title="Add to Calendar" class="addeventatc">
+              Save
+              <span *ngIf="event" class="start">{{getStartDateTime()}}</span>
+              <span *ngIf="event && event.end_date" class="end">{{getEndDateTime()}}</span>
+              <span *ngIf="event" class="title">{{event.name}}</span>
+              <span *ngIf="event" class="description">{{getCalendarDescription()}}</span>
+              <span *ngIf="event && event.location" class="location">{{event.formatted_address}}</span>
+              <span *ngIf="event" class="uid">{{event.event_id}}</span>
+          </div>
+
+          <button class="button-pill-like button-blue" mat-raised-button ngxClipboard [cbContent]="shareUrl" (click)='shareAlert()' color="primary">Copy URL</button>
+          <!-- <input type="text" class="form-control" [(ngModel)]="text1" placeholder="content will be copy after click the copy button"> -->
+
+          <!-- <button type="submit" class="button-pill-like button-blue" mat-raised-button color="primary" (click)="likeEvent(); likeEventGA()">Like</button>
+
+          <p>0 people like this</p> -->
 
            <!-- event description -->
-           <p *ngIf="event && event.description" fxLayout="column" class="event-description">{{event.description}}</p>
+           <p *ngIf="event && event.description && !extraDescription" fxLayout="column">
+             <span>{{limitedDescription(event.description)}} <a *ngIf="largeDescription(event.description)" (click)="openDescription()" class="disclaimer-link">read more</a></span>
+           </p>
 
-           <div title="Add to Calendar" class="addeventatc">
-               Add to Calendar
-               <span class="start">{{event.start_date}}</span>
-               <span class="end">{{event.end_date}}</span>
-               <span class="timezone"></span>
-               <span class="title">{{event.name}}</span>
-               <span class="description">Description of the event</span>
-               <span class="location">{{event.formatted_address}}</span>
-           </div>
+           <p *ngIf="event && event.description && extraDescription" fxLayout="column">
+             <span>{{event.description}} <a (click)="closeDescription()" class="disclaimer-link">read less</a></span>
+           </p>
+
+           <mat-list *ngIf="event && event.formatted_address && event.lat && event.lng" role="list" class="directions-list">
+             <mat-list-item role="listitem" (click)="getDirections(); getDirectionsGA()">
+               <p class="disclaimer-ellipsis"><strong>Address: </strong>{{event.formatted_address}}</p>
+               <div class="spacer"></div>
+               <mat-icon>keyboard_arrow_right</mat-icon>
+             </mat-list-item>
+           </mat-list>
+
+           <mat-list *ngIf="event && event.formatted_address && !event.lat && !event.lng" role="list" class="directions-list">
+             <mat-list-item role="listitem">
+               <p class="disclaimer-ellipsis"><strong>Address: </strong>{{event.formatted_address}}</p>
+               <div class="spacer"></div>
+             </mat-list-item>
+           </mat-list>
+
+           <p *ngIf="event && !event.formatted_address && event.location_string">{{event.location_string}}</p>
 
         </div> <!-- ./event-content -->
 
@@ -75,19 +101,19 @@
      style="margin-top: -15px;">
 
      <mat-list *ngIf="event" role="list" class="action-list">
-       <mat-list-item *ngIf="event.formatted_address" role="listitem" (click)="getDirections(); getDirectionsGA()">
-         <p class="disclaimer-ellipsis">{{event.formatted_address}}</p>
+       <mat-list-item *ngIf="event.formatted_address && event.lat && event.lng" role="listitem" (click)="getDirections(); getDirectionsGA()">
+         <h3>Get Directions</h3>
          <div class="spacer"></div>
          <mat-icon>keyboard_arrow_right</mat-icon>
        </mat-list-item>
        <!-- <mat-list-item role="listitem" (click)="saveEvent(); saveEventGA()"> -->
        <!-- <mat-list-item role="listitem"> -->
         <!-- </mat-list-item> -->
-       <mat-list-item role="listitem" (click)="openShareDialog(); shareListGA()">
+       <!-- <mat-list-item role="listitem" (click)="openShareDialog(); shareListGA()">
           <h3>Invite Friends</h3>
           <div class="spacer"></div>
           <mat-icon>keyboard_arrow_right</mat-icon>
-        </mat-list-item>
+        </mat-list-item> -->
        <!-- <mat-list-item role="listitem" (click)="clicked()">
          <h3>Add to Calendar</h3>
          <div class="spacer"></div>
@@ -100,6 +126,11 @@
        </mat-list-item>
        <mat-list-item role="listitem" (click)="reportEvent(); reportGA()">
          <h3>Report Event</h3>
+         <div class="spacer"></div>
+         <mat-icon>keyboard_arrow_right</mat-icon>
+       </mat-list-item>
+       <mat-list-item role="listitem" (click)="eventIssue(); issueGA()">
+         <h3>Something Go Wrong?</h3>
          <div class="spacer"></div>
          <mat-icon>keyboard_arrow_right</mat-icon>
        </mat-list-item>

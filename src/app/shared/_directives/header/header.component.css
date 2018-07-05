@@ -1,12 +1,19 @@
 mat-toolbar {
-  background: white;
+  background: #40D5C0;
   border-bottom: 0px solid !important;
   margin-bottom: 0px;
-  padding-top: 5px;
+  padding-top: 10px;
+  padding-left: 18px;
+  padding-right: 24px;
+  min-height: 75px;
 }
 
-.app-font-weight {
-  font-weight: lighter;
+.container {
+  margin: auto;
+}
+
+.header-button {
+    margin-top: -20px !important;
 }
 
 .app-logo {
@@ -26,11 +33,11 @@ mat-toolbar {
 }
 
 .app-name {
-  font-weight: lighter !important;
-  font-size: 24px;
+  font-weight: 600 !important;
+  font-size: 32px;
   vertical-align: super !important;
-  color: rgba(0,0,0,0.55);
-  font-family: 'HelveticaNeue-Thin', 'Helvetica Neue Light', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  color: white !important;
+  font-family: 'Satisfy', cursive;
 }
 
 .navigation{
@@ -71,4 +78,14 @@ li a {
   border-radius: 50%;
   width: 35px;
   margin-right: 25px !important;
+}
+
+.icon-button {
+    font-size: 36px;
+    margin-top: -17px;
+    color: white !important;
+}
+
+.icon-button:hover {
+  cursor: pointer;
 }

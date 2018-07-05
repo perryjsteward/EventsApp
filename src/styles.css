@@ -1,6 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+
+.create-dialog /deep/ .mat-dialog-container {
+  padding: 0px !important;
+}
+
+.create-dialog .mat-dialog-container {
+  padding: 0px !important;
+}
+
 html {
     height: calc(100vh - 125px) !important;
     margin: 0;
@@ -12,7 +21,7 @@ body {
   color: rgba(0,0,0,0.55);
   font-family: 'HelveticaNeue-Thin', 'Helvetica Neue Light', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, 'Lucida Grande', sans-serif;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 100;
   color: rgba(0,0,0,0.55);
   font-size: 17px;
   line-height: 24px;
@@ -37,10 +46,10 @@ body {
 
 h1 {
   color: rgba(0,0,0,0.75);
-    font-family: 'HelveticaNeue-Thin', 'Helvetica Neue Light', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, 'Lucida Grande', sans-serif;
+    font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, 'Lucida Grande', sans-serif;
     font-size: 38px;
     line-height: 44px;
-    font-weight: 100;
+    font-weight: normal;
     margin: 0 0 10px;
 }
 
@@ -69,7 +78,7 @@ h3 {
 }
 
 .app-button {
-  color: #40D5C0 !important;
+  color: #CD91EA !important;
   font-weight: 300 !important;
 }
 

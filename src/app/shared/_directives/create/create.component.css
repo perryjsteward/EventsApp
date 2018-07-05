@@ -3,12 +3,49 @@
   width: 100%;
 }
 
+#create-dialog .material-icons {
+  font-size: 36px;
+}
+
+#create-dialog .more-options {
+  color: #40D5C0 !important;
+  font-size: 16px;
+}
+
+#create-dialog .container {
+  padding: 24px;
+  padding-top: 0px !important;
+}
+
+#create-dialog .button-pill {
+    border-radius: 530px;
+    padding: 5px 10px;
+    font-size: 16px;
+}
+
+#create-dialog .button-disabled {
+  background-color: rgba(0,0,0,.12) !important;
+}
+
+
+#create-dialog .button-red {
+  background-color: #F23C57;
+}
+
 #create-dialog mat-card{
   box-shadow: none;
   height: 100% !important;
 }
 
+#create-dialog {
+  padding: 0px !important;
+}
 
+#create-dialog .title-background {
+  background-color: #40D5C0;
+  padding: 24px;
+  color: white;
+}
 
 #create-dialog /deep/ .mat-form-field-label-wrapper {
     top: -.98375em !important;
@@ -43,7 +80,7 @@
 }
 
 .form-actions {
-  margin-top: 40px;
+  margin-top: 10px;
 }
 
 .form-icon {
@@ -58,10 +95,11 @@
 
 .create-title h1 {
   margin-bottom: 0px;
+  color: white;
 }
 .create-title p {
   margin-top: 5px;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 
@@ -75,6 +113,8 @@
   width: 100%;
   height: 30px;
 }
+
+
 
 .create-dialog mat-card-header, mat-card-content {
   font-weight: 300;

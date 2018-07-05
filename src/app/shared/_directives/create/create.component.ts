@@ -6,7 +6,7 @@ import { EventService } from '../../../core/_services/event.service';
 import { Router } from '@angular/router';
 import { MapsAPILoader } from '@agm/core';
 import { } from 'googlemaps';
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-create',
@@ -18,7 +18,7 @@ export class CreateComponent implements OnInit {
 
   disclaimer: any;
   disclaimerFlag = false;
-  extraOptions = true;
+  extraOptions = false;
   event: any;
   public searchControl: FormControl;
 
@@ -38,11 +38,11 @@ export class CreateComponent implements OnInit {
 
   ngOnInit() {
     this.searchControl = new FormControl();
-
+    this.autoComplete();
     this.event = {
       "name": '',
       "description" : '',
-      "location": '',
+      "location_string": '',
       "start_date": '',
       "end_date": '',
       "start_time": '',
@@ -106,18 +106,27 @@ export class CreateComponent implements OnInit {
         form.value['formatted_address'] = this.selectedLocation.formatted_address;
         form.value['lat'] = this.selectedLocation.geometry.location.lat();
         form.value['lng'] = this.selectedLocation.geometry.location.lng();
+        // form.value['location_string'] = form.value['formatted_address'];
+    } else {
+      form.value['formatted_address'] = this.event.location_string;
+    }
+
+    form.value['start_date'] = moment.utc(form.value['start_date']).format("YYYY-MM-DD")
+
+    if(form.value['end_date']){
+      form.value['end_date'] = moment.utc(form.value['end_date']).format("YYYY-MM-DD")
     }
 
     console.log(form.value)
     // upload event
-    // this.eventsService.create(form.value)
-    //     .subscribe(response => {
-    //        if(response.event_id){
-    //          this.submitFormGA();
-    //          this.router.navigate(['/view'],{ queryParams: { id: btoa(response.event_id) } });
-    //          this.dialog.closeAll();
-    //        }
-    //     });
+    this.eventsService.create(form.value)
+        .subscribe(response => {
+           if(response.event_id){
+             this.submitFormGA();
+             this.router.navigate(['/view'],{ queryParams: { id: btoa(response.event_id) } });
+             this.dialog.closeAll();
+           }
+        });
   }
 
   openDisclaimer(){

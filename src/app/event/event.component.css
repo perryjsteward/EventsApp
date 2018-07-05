@@ -1,8 +1,14 @@
 .event-container {
   height: 100%;
   margin: auto;
-  padding:10px;
+  padding: 10px;
   text-align: left;
+}
+
+.extra-padding {
+  padding: 24px;
+  padding-top: 34px;
+  padding-bottom: 10px;
 }
 
 .intro-container {
@@ -38,7 +44,6 @@
 }
 
 .event-content {
-  margin: 10px !important;
   margin-right: 10px;
   height: 100%;
   width: 100%;
@@ -63,14 +68,22 @@
 
 .event-name {
   margin-bottom: 0px;
+  margin-top: 3px;
+}
+
+.event-type {
+  margin-top: 2px;
 }
 
 .event-time {
-  margin-bottom: 10px !important;
+  margin-top: 15px;
+  margin-bottom: 0px !important;
+  font-weight: 500;
+  color: black;
 }
 
 .event-map agm-map {
-    height: 400px;
+    height: 300px;
 }
 
 .event-location-card {
@@ -95,6 +108,28 @@
   margin-top: 30px !important;
 }
 
+.directions-list {
+  margin-left: -15px;
+  padding-top: 0px;
+  padding-right: 0px !important;
+  color: rgba(0,0,0,0.55);
+}
+
+.directions-list p {
+  color: black !important;
+  font-weight: lighter !important;
+}
+
+
+.directions-list mat-icon {
+  padding-right: 0px !important;
+  color: #B5B5B5;
+  margin-right: -21px;
+}
+
+.directions-list mat-list-item:hover {
+  cursor: pointer;
+}
 
 .action-list mat-list-item {
   border-bottom: 1px solid #E7E7E7 !important;
@@ -150,7 +185,7 @@
 
 .disclaimer {
   margin-bottom: 0px;
-  font-size: 14px;
+  font-size: 16px !important;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -160,23 +195,75 @@
   margin-top: -20px;
   color: #40D5C0 !important;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .addeventatc {
-  width: 100% !important;
-  padding: 0px !important;
-  padding-top: 0px !important;
-  padding-bottom: 0px !important;
-  border-radius: 2px !important;
-  border: 1px solid #40D5C0 !important;
-  text-align: center !important;
-  line-height: 36px !important;
-  font-size: 14px !important;
-  color: #40D5C0 !important;
-  font-weight: 400 !important;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  background-color: #F23C57;
+  border-radius: 50px;
+  padding: 15px 27px;
+  font-size: 16px;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  color: white !important;
+  border: 0px !important;
+  font-weight: 500;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.button-red {
+  background-color: #F23C57;
 }
 
 .addeventatc /deep/ .addeventatc_icon {
   display: none !important;
+}
+
+.button-pill-like {
+    border-radius: 50px !important;
+    padding: 5px 16px !important;
+    font-size: 14px;
+    font-weight: 300;
+    color: white !important;
+    margin-left: 10px;
+}
+
+.button-blue {
+  background-color: #3498db;
+}
+
+.bg {
+    /* The image used */
+    height: 200px;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 67px;
+    margin-top: -3px;
+}
+
+.bg-1 {
+    background-image: url("https://s3.eu-west-2.amazonaws.com/eventsapp-img/abstract-art-celebration-750843-min.jpg");
+}
+
+.bg-2 {
+    background-image: url("https://s3.eu-west-2.amazonaws.com/eventsapp-img/adult-face-fun-37862-min.jpg");
+}
+
+.bg-3 {
+    background-image: url("https://s3.eu-west-2.amazonaws.com/eventsapp-img/alcohol-art-bottles-209620-min.jpg");
+}
+
+.bg-4 {
+    background-image: url("https://s3.eu-west-2.amazonaws.com/eventsapp-img/applause-audience-band-196652-min.jpg");
+}
+
+.bg-5 {
+    background-image: url("https://s3.eu-west-2.amazonaws.com/eventsapp-img/assortment-bright-candy-1043519-min.jpg");
+}
+
+.bg-6 {
+    background-image: url("https://s3.eu-west-2.amazonaws.com/eventsapp-img/boxes-celebration-champagne-glasses-1050465-min.jpg");
 }

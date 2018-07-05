@@ -1,7 +1,49 @@
 .intro-container {
   height: auto;
   margin: auto;
-  padding-bottom: 50px;
+  padding-top: 50px;
+  padding-bottom: 100px;
+}
+
+.bg {
+    /* The image used */
+    background-color: #a6acb5;
+    background-image: url("https://s3.eu-west-2.amazonaws.com/eventsapp-img/applause-audience-band-196652-dark-min.png");
+    height: 100%;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 67px;
+    margin-top: -3px;
+}
+
+.bg-text {
+    position: absolute;
+    left: 0;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    opacity: 1 !important;
+    text-shadow: 1px 1px 1px black;
+}
+
+.bg-text p, h1 {
+  color: white !important;
+  padding: 10px;
+}
+
+.dark {
+  color: rgba(0,0,0,0.55) !important;
+}
+
+.bg-text h1 {
+  font-size: 48px;
+  font-weight: 600;
+}
+
+.bg-text p {
+  font-weight: 600;
 }
 
 .marketing-section {
@@ -14,6 +56,11 @@
   display: none;
 }
 
+.button-full-width {
+    width: 100%;
+    font-size: 18px;
+    font-weight: normal !important;
+}
 
 .account-img {
     width: 100%;
@@ -24,9 +71,10 @@
   /* height: 100%; */
   margin: auto;
   width: 100%;
-  background-color: #40D5C0;
-  padding-bottom: 65px;
-  padding-top: 15px;
+  background-color: #F23C57;
+  /* background-color: #CD91EA; */
+  padding-bottom: 115px;
+  padding-top: 65px;
 }
 
 
@@ -49,4 +97,14 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.button-pill {
+    border-radius: 50px;
+    padding: 13px 26px;
+    font-size: 16px;
+}
+
+.button-red {
+  background-color: #F23C57;
 }

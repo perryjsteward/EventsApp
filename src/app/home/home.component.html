@@ -1,42 +1,14 @@
-<div class="intro-container"
-     fxLayout
-     fxLayout.xs="column"
-     fxLayoutAlign="center"
-     fxLayoutGap.xs="0"
-     [fxFlex.xs]="100"
-     [fxFlex.sm]="100"
-     fxFlex.md="960px"
-     fxFlex.lg="1100px">
 
-      <div class='marketing-section'
-        fxFlex.xs="100"
-        fxFlex.sm="100"
-        fxFlex.md="40"
-        fxFlex.lg="40"
-        [ngStyle.xs]="{'text-align': 'center'}">
-        <h1>Simple. Easy. Events!</h1>
-        <p>
-          With EventsApp you can quickly create an event for any occasion and share it with friends and family at a click of a button.
-        </p>
-        <p>Free to use - no sign up nesscary,  Go on, get started.</p>
-        <p>&nbsp;</p>
-        <p>
-          <button class="app-button-raised" mat-raised-button color="primary" (click)="openCreateDialog(); createEventGA()">Create Event</button>
-        </p>
-      </div>
-      <div class='marketing-section'
-        fxFlex.xs="100"
-        fxFlex.sm="100"
-        fxFlex.md="60"
-        fxFlex.lg="60">
-        <!-- image for full screen -->
-        <p>
-          <img width="550px" class="intro-img" fxShow.sm="false" fxShow.xs="false" src="/assets/marketing-laptop.svg"/>
-          <!-- image for mobile -->
-          <img width="200px" class="intro-img" fxShow.lg="false" fxShow.md="false" src="/assets/marketing-phone.svg"/>
-        </p>
-      </div>
-</div>
+  <div class="bg">
+    <div class="bg-text">
+      <h1>Create and share events</h1>
+      <p style="margin-top: -12px;">Free to use - no sign up nesscary. Go on, get started.</p>
+      <p>
+        <button class="button-pill button-red" mat-raised-button color="primary" (click)="openCreateDialog(); createEventGA()">Create event</button>
+      </p>
+    </div>
+  </div>
+
 
 <div class="marketing-outer-container">
 
@@ -92,11 +64,10 @@
         fxFlex.lg="40"
         [ngStyle.xs]="{'text-align': 'center'}">
         <!-- image for mobile -->
-        <h1>Get an account</h1>
-        <p>With an EventsApp account you can save your events  and invite other firends with EventsApp accounts.</p>
-        <p>You can also link up other social accounts to import events!</p>
-        <p>&nbsp;</p>
+        <h1 class="dark">Get an account</h1>
+        <p>You can link up other social accounts to import events</p>
         <p><strong>Coming soon!</strong> we'll get this up and running as soon as possible</p>
+        <br />
         <p>
           <button mat-raised-button color="primary" disabled>Log in</button>
           <button mat-button color="primary" disabled>Sign up</button>

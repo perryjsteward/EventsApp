@@ -78,7 +78,8 @@ export class HeaderComponent implements OnInit {
       height: '100%',
       maxWidth: '100%',
       maxHeight: '100%',
-      autoFocus: false
+      autoFocus: false,
+      panelClass: 'create-dialog'
     });
 
     dialogRef.afterClosed().subscribe(result => {

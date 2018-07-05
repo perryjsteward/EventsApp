@@ -34,9 +34,11 @@ export class EventService {
                   .catch((error: Response) => this.handleError(error));
     }
 
-    // update(event: any) {
-    //     return this.http.put('/events/' + event.id, event);
-    // }
+    update(event: any) {
+        return this.http.put(this.apiDomain + 'events/' + event.event_id, event)
+                  .map((response: Response) => response)
+                  .catch((error: Response) => this.handleError(error));
+    }
     //
     // delete(id: number) {
     //     return this.http.delete('/events/' + id);
