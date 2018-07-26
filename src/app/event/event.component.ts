@@ -26,14 +26,23 @@ export class EventComponent implements OnInit {
   extraDescription = false;
   userLocation: any;
   shareUrl: any;
+  copied = false;
+
+  locationOptions = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  };
 
   constructor(private cd : ChangeDetectorRef, private mapsAPILoader: MapsAPILoader, private router: Router,public dialog: MatDialog, private eventService: EventService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
 
     if(navigator.geolocation){
-      navigator.geolocation.getCurrentPosition(this.setPosition.bind(this));
-      };
+      this.userLocation = true;
+    } else {
+      this.userLocation = false;
+    }
 
     this.activatedRoute.queryParams.subscribe(params => {
         if(params.id && params.id != ''){
@@ -45,12 +54,13 @@ export class EventComponent implements OnInit {
     });
   }
 
-  eventImage(){
-    return 'bg-5'
+  locationError(err){
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+    // this.userLocation = false;
   }
 
-  setPosition(position){
-      this.userLocation = position.coords;
+  eventImage(){
+    return 'bg-5'
   }
 
   likeEvent(){
@@ -169,7 +179,7 @@ export class EventComponent implements OnInit {
   }
 
   getEventUrl(){
-    return window.location.host + '/view?id=' + btoa(this.event.event_id);
+    return "https://" + window.location.host + '/#/view?id=' + btoa(this.event.event_id);
   }
 
   getStartDateTime(){
@@ -228,7 +238,8 @@ export class EventComponent implements OnInit {
   }
 
   shareAlert(){
-    alert("I've copied the URL!");
+    // alert("I've copied the URL!");
+    this.copied = true;
   }
 
 
@@ -263,8 +274,15 @@ export class EventComponent implements OnInit {
     this.extraDescription = false;
   }
 
+  navigateUser(position){
+    // console.log(position)
+      window.location.href = "http://maps.google.com/?saddr=" + position.coords.latitude + "," + position.coords.longitude +"&daddr=" + this.event.formatted_address;
+  }
+
   getDirections(){
-    window.location.href = "http://maps.google.com/?saddr=" + this.userLocation.latitude + "," + this.userLocation.longitude +"&daddr=" + this.event.formatted_address;
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.navigateUser(position)
+    },this.locationError,this.locationOptions);
   }
 
   reportEvent(){
@@ -278,7 +296,7 @@ export class EventComponent implements OnInit {
   }
 
   getShareContent(){
-    this.shareUrl = "Hey there, you have an invite waiting for you at EventsApp. Check it out below! \n\n" + this.getEventUrl();
+    this.shareUrl = this.getEventUrl();
 
   }
 }

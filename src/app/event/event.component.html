@@ -38,7 +38,7 @@
           <!-- </p> -->
 
           <div title="Add to Calendar" class="addeventatc">
-              Save
+              Calendar
               <span *ngIf="event" class="start">{{getStartDateTime()}}</span>
               <span *ngIf="event && event.end_date" class="end">{{getEndDateTime()}}</span>
               <span *ngIf="event" class="title">{{event.name}}</span>
@@ -47,7 +47,10 @@
               <span *ngIf="event" class="uid">{{event.event_id}}</span>
           </div>
 
-          <button class="button-pill-like button-blue" mat-raised-button ngxClipboard [cbContent]="shareUrl" (click)='shareAlert()' color="primary">Copy URL</button>
+          <button class="button-pill-like button-blue" mat-raised-button ngxClipboard [cbContent]="shareUrl" (click)='shareAlert()' color="primary">
+            <span *ngIf="!copied">Copy URL</span>
+            <span *ngIf="copied">Copied!</span>
+          </button>
           <!-- <input type="text" class="form-control" [(ngModel)]="text1" placeholder="content will be copy after click the copy button"> -->
 
           <!-- <button type="submit" class="button-pill-like button-blue" mat-raised-button color="primary" (click)="likeEvent(); likeEventGA()">Like</button>
@@ -63,7 +66,7 @@
              <span>{{event.description}} <a (click)="closeDescription()" class="disclaimer-link">read less</a></span>
            </p>
 
-           <mat-list *ngIf="event && event.formatted_address && event.lat && event.lng" role="list" class="directions-list">
+           <mat-list *ngIf="event && event.formatted_address && event.lat && event.lng && userLocation" role="list" class="directions-list">
              <mat-list-item role="listitem" (click)="getDirections(); getDirectionsGA()">
                <p class="disclaimer-ellipsis"><strong>Address: </strong>{{event.formatted_address}}</p>
                <div class="spacer"></div>
@@ -72,6 +75,13 @@
            </mat-list>
 
            <mat-list *ngIf="event && event.formatted_address && !event.lat && !event.lng" role="list" class="directions-list">
+             <mat-list-item role="listitem">
+               <p class="disclaimer-ellipsis"><strong>Address: </strong>{{event.formatted_address}}</p>
+               <div class="spacer"></div>
+             </mat-list-item>
+           </mat-list>
+
+           <mat-list *ngIf="event && event.formatted_address && event.lat && event.lng && !userLocation" role="list" class="directions-list">
              <mat-list-item role="listitem">
                <p class="disclaimer-ellipsis"><strong>Address: </strong>{{event.formatted_address}}</p>
                <div class="spacer"></div>
@@ -101,7 +111,7 @@
      style="margin-top: -15px;">
 
      <mat-list *ngIf="event" role="list" class="action-list">
-       <mat-list-item *ngIf="event.formatted_address && event.lat && event.lng" role="listitem" (click)="getDirections(); getDirectionsGA()">
+       <mat-list-item *ngIf="event.formatted_address && event.lat && event.lng && userLocation" role="listitem" (click)="getDirections(); getDirectionsGA()">
          <h3>Get Directions</h3>
          <div class="spacer"></div>
          <mat-icon>keyboard_arrow_right</mat-icon>
