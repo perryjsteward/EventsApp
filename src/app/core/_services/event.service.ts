@@ -11,7 +11,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class EventService {
 
-    apiDomain = "https://api.eventsapp.co.uk/";
+    apiDomain = "https://api.eventsapp.co.uk/v1/";
 
     constructor(private http: HttpClient) { }
 

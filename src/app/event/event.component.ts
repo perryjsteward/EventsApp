@@ -153,12 +153,14 @@ export class EventComponent implements OnInit {
   getEvent(id: any){
     this.eventService.getById(atob(String(id)))
         .subscribe(response => {
-          console.log(response)
+          console.log(response);
           this.event = response.events[0];
           this.getShareContent();
           this.updateMap(this.event);
           this.cd.detectChanges();
         })
+
+
   }
 
   getCalendarDescription(){
